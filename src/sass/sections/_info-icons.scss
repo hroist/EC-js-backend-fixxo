@@ -1,0 +1,15 @@
+.info-icons {
+    
+    .container-small {
+        border-top: 1px solid $color-gray-20;
+        padding: 2rem 0;   
+
+
+        @include md { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;        
+            gap: 1rem;
+        }
+    }
+}

@@ -1,0 +1,197 @@
+.button-theme-color {
+    position: relative;
+    background-color: $color-theme;
+    color: $color-white;
+    font-weight: 600;
+    font-family: $font-poppins;
+    padding: 0.8em 2em;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s ease-in-out;
+    
+    &:before {
+        content:'';
+        position: absolute;
+        border-width: 2px;
+        border-style: solid;
+        border-image: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 10%, rgba(255,115,115,1) 10%, rgba(255,115,115,1) 50%, rgba(255,115,115,1) 90%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%) 1;
+        height: calc(100% - 18px);
+        width: calc(100% - 18px);
+        z-index: 1;
+        top: 7px;
+        left: 7px;
+        transition: 0.2s ease-in-out;
+
+    }
+
+    &:hover {
+        color: $color-dark;
+
+        &:before {
+            border-image: linear-gradient(135deg, rgba(255,115,115,1) 0%, rgba(255,115,115,1) 100%) 1;
+        }
+    }
+
+    @include md {
+        font-size: 1rem;
+    }
+}
+
+.button-theme-dark {
+    position: relative;
+    background-color: $color-dark;
+    color: $color-white;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: $font-poppins;
+    padding: 0.8em 2em;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    
+    &:before {
+        content:'';
+        position: absolute;
+        border-width: 2px;
+        border-style: solid;
+        border-image: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 10%, rgba(35,38,42,1) 10%, rgba(35,38,42,1) 50%, rgba(35,38,42,1) 90%, rgba(255,255,255,1) 90%, rgba(255,255,255,1) 100%) 1;
+        height: calc(100% - 18px);
+        width: calc(100% - 18px);
+        z-index: 1;
+        top: 7px;
+        left: 7px;
+        transition: 0.2s ease-in-out;
+    }
+
+    &:hover {
+        color: $color-theme;
+
+        &:before {
+            border-image: linear-gradient(135deg, rgba(35,38,42,1) 0%, rgba(35,38,42,1) 100%) 1;
+        }
+    }
+
+    @include md {
+        font-size: 1rem;
+    }
+}
+
+.button-theme-white {
+    position: relative;
+    background-color: $color-white;
+    color: $color-text-dark;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: $font-poppins;
+    padding: 0.8em 2em;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    
+    &:before {
+        content:'';
+        position: absolute;
+        border-width: 2px;
+        border-style: solid;
+        border-image: linear-gradient(135deg, rgba(34,37,41,1) 0%, rgba(34,37,41,1) 10%, rgba(255,255,255,1) 10%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 90%, rgba(34,37,41,1) 90%, rgba(34,37,41,1) 100%) 1;
+        height: calc(100% - 18px);
+        width: calc(100% - 18px);
+        z-index: 1;
+        top: 7px;
+        left: 7px;
+        transition: 0.2s ease-in-out;
+    }
+
+    &:hover {
+        color: $color-theme;
+
+        &:before {
+            border-image: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%) 1;
+        }
+    }
+
+    @include md {
+        font-size: 1rem;
+    }
+}
+
+.button-forms {
+    background-color: $color-theme;
+    color: $color-white;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: $font-poppins;
+    padding: 0.8rem 1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin: 0.6rem 0;
+    width: 100%;
+    
+    &:hover {
+        color: $color-dark;
+    }
+
+    @include xl {
+        width: 75%;
+    }
+
+    @include md {
+        font-size: 1rem;
+    }
+}
+
+.menu-link-circle {
+    position: relative;
+    border-radius: 50%;
+    height: 35px;
+    aspect-ratio: 1;
+    background-color: $color-white;
+    box-shadow: 0px 0px 15px 1px $color-gray-20;
+    font-size: 15px;
+    transition: 0.2s ease-in-out;
+    z-index: 2;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-dark;
+        color: $color-white;
+    }
+}
+
+.badge {
+    width: 10px;
+    aspect-ratio: 1;
+    padding: 0.3em 0.3em 0.25em 0.3em;
+    font-size:11px;
+    font-weight: $font-weight-bold;
+    color: $color-white;
+    border-radius: 50%;
+    background-color: $color-theme;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+
+        &:empty {
+            display: none;
+        }
+
+}
+
+.size-button {
+    border: 1px solid $color-dark;
+    width: 35px;
+    padding: 0.3rem;
+    text-align: center;
+    cursor: pointer;
+    background-color: $color-white;
+    font-family: $font-poppins;
+
+    &:focus {
+        background-color: $color-dark;
+        color: $color-white;
+    }
+}

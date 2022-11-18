@@ -1,0 +1,25 @@
+.quantity-counter {
+    display: flex;
+    border: 1px solid $color-gray-40;
+    height: 40px;
+
+    .decrease {
+        border-right: 1px solid $color-gray-40;;
+        width: 30px;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-20;
+        cursor: pointer;
+    }
+
+    .counter-number {
+        width: 35px;
+    }
+
+    .increase {
+        border-left: 1px solid $color-gray-40;
+        width: 30px;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-20;
+        cursor: pointer;
+    }
+}

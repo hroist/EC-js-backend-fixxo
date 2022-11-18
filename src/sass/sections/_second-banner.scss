@@ -1,0 +1,71 @@
+.second-banner {
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include lg {
+        flex-direction: row;
+    }
+
+    .second-banner-left {
+        background-image: url(/src/assets/images/placeholders/woman-upper-body.svg);
+        background-size: cover;
+        width: 100%;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        text-align: end;
+        padding-right: 2rem;
+
+        @include lg {
+            margin-right: 1rem;
+        }
+
+        h1 {
+            line-height: 1.2;
+            font-size: $font-size-35;
+            margin-bottom: 2rem;
+
+            span {
+                display: block;
+            }
+        }
+
+        p {
+            width: 50%;
+            font-size: $font-size-11;
+            margin-bottom: 1.5rem;
+        }
+    }
+    
+    .second-banner-right {
+        background-image: url(/src/assets/images/placeholders/woman-coat.svg);
+        background-size: cover;
+        width: 100%;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        justify-content: flex-end;
+        padding-left: 2rem;
+
+        @include lg {
+            margin-left: 1rem;
+        }
+
+            h1 {
+                line-height: 1.2;
+                font-size: $font-size-35;
+                margin-bottom: 2rem;
+
+                span {
+                    display: block;
+                }
+            }
+    }
+
+    button {
+        margin-bottom: 40px;
+    }
+}

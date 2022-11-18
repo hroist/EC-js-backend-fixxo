@@ -1,0 +1,51 @@
+.offcanvas-right {
+    height: 100%;
+    position: fixed;
+    display: none;
+    width: 0;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    background-color: $color-white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding: 100px 2rem;
+
+    &.open {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @include sm {
+            width: 350px;
+        }
+    }
+
+    .close-cart {
+      background-color: transparent;
+      border: 1px solid $color-gray-20;
+      align-self: flex-end;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+
+
+      &:hover {
+        background-color: $color-dark;
+        color: $color-white;
+      }
+    }
+
+  }
+
+ 
+  
+
+
+
+  
+
+  
+
+  
+
+  

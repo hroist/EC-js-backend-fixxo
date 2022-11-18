@@ -1,0 +1,32 @@
+
+
+    .product-grid-large {
+
+        @include lg {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+        
+        .display-image-large      { 
+            flex: 1;
+            height: 350px;
+            background-image: url(/src/assets/images/placeholders/grid-large-placeholder.png);
+            background-size: contain;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-self: baseline;
+        }
+
+        @include lg {
+                
+                .display-image-large { 
+                    height: 600px;
+     
+                }
+
+        }
+    }

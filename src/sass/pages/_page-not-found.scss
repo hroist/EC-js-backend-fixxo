@@ -1,0 +1,19 @@
+.page-not-found {
+    height: 500px;
+    color: $color-theme;
+    flex-direction: column;
+
+    
+    h3 {
+        font-size: $font-size-65;
+        margin: 0;
+        text-shadow: 3px 3px $color-gray-20;   
+    }
+
+    h4 {
+        font-size: $font-size-16;
+        font-weight: $font-weight-regular;
+        margin: 0;
+    }
+
+}

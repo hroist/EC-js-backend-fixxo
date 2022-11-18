@@ -1,0 +1,36 @@
+// FONTS
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+// CORE
+@import "../core/variables";
+@import "../core/breakpoints";
+@import "../core/utilities";
+//COMPONENTS
+@import "../components/cards";
+@import "../components/image-slider";
+@import "../components/icon-card";
+@import "../components/shopping-cart";
+@import "../components/shopping-cart-item";
+//COMPONENTS -- UI
+@import "../components/ui/buttons";
+@import "../components/ui/dropdown";
+@import "../components/ui/quantity-counter";
+// SECTIIONS
+@import "../sections/top-menu";
+@import "../sections/showcase";
+@import "../sections/main-banner";
+@import "../sections/product-grid";
+@import "../sections/second-banner";
+@import "../sections/our-specialty";
+@import "../sections/product-display";
+@import "../sections/banner-small";
+@import "../sections/product-columns";
+@import "../sections/footer";
+@import "../sections/site-title";
+@import "../sections/info-icons";
+@import "../sections/product-details";
+@import "../sections/map-section";
+@import "../sections/contact-form";
+// PAGES
+@import "../pages/contact-page";
+@import "../pages/page-not-found";
+

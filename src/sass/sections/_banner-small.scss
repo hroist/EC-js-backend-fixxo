@@ -1,0 +1,39 @@
+.banner-small {
+    margin-top: 5rem;
+
+    .container-small {
+        max-width: 100%;
+        padding: 0;
+
+        @include sm {
+            max-width: 65%;
+            padding: 0 1rem;
+        }
+    
+        .banner-content {
+            background-color: $color-gray-40;
+            flex-direction: column;
+            padding: 2rem;
+            color: $color-white;
+
+            h1 {
+                font-size: $font-size-35;
+                font-weight: $font-weight-bold;
+            }
+
+            h2 {
+                font-weight: $font-weight-bold;
+                font-size: $font-size-14;
+                margin-bottom: 2rem;
+
+                @include sm {
+                    font-size: $font-size-16;
+                }
+
+                @include md {
+                    font-size: $font-size-18;
+                }
+            }
+        }
+    }
+}

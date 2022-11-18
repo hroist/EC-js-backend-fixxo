@@ -1,0 +1,31 @@
+.dropdown {
+    margin: 0.5rem 0;
+    width: 150px;
+    background-color: $color-white;
+    border: 1px solid $color-gray-40;
+    padding: 0.5rem;
+    color: $color-text-dark;
+    font-family: $font-poppins;
+    cursor: pointer;
+    text-align: start;
+    border-radius: 0px;
+
+}
+
+   .dropdown-list {
+    position: absolute;
+    list-style: none;
+    padding: 0.3rem;
+    margin: 0;
+    background-color: $color-white;
+    border: 1px solid $color-gray-40;
+    transform: translate(0, -9px);
+    width: 139px;
+    
+        li {
+            font-size: $font-size-14;
+            cursor: pointer;
+        }
+    
+    } 
+

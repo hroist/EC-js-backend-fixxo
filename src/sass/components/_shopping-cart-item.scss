@@ -1,0 +1,92 @@
+.items-box {
+
+    .shoppingcart-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin: 30px 20px;
+
+      .item-image {
+        background-color: $color-gray-20;
+        height: 65px;
+        width: 65px;
+        margin-right: 5px;
+
+        img {
+          height: 65px;
+          width: 65px;
+        }
+
+      }
+
+      .item-info {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 170px;
+        justify-self: flex-start;
+        
+        .item-info-name {
+          display: inline-block;
+          font-weight: $font-weight-medium;
+          font-size: $font-size-14;
+          margin-bottom: 16px;
+          margin-top: 7px;
+          
+          
+        }
+
+        .quantity-counter {
+          border: 1px solid $color-gray-40;
+          height: 20px;
+          width: 80px;
+
+          button {
+            background-color: transparent;
+            border: none;
+          }
+              
+          .decrease {
+              border-right: 1px solid $color-gray-40;;
+              font-weight: $font-weight-medium;
+              font-size: $font-size-20;
+              cursor: pointer;
+          }
+      
+          .counter-number {
+              width: 30px;
+              font-size: $font-size-16;
+          }
+      
+          .increase {
+              border-left: 1px solid $color-gray-40;
+              font-weight: $font-weight-medium;
+              font-size: $font-size-20;
+              cursor: pointer;
+          }
+        }
+      }
+
+      .item-price {
+        justify-self: flex-end;
+        font-size: $font-size-14;
+        font-weight: $font-weight-medium;
+        text-align: right;
+        padding-left: 6px;
+        
+
+        button {
+          margin-top: 8px;
+          border: none; 
+          background-color: transparent;
+          cursor: pointer;
+          transition: 0.2s ease-in-out;
+
+          &:hover {
+            color: $color-theme;
+          }
+
+        }
+      }
+    }
+  }

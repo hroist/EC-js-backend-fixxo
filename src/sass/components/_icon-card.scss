@@ -1,0 +1,15 @@
+.info-icon-card {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h2 {
+        font-size: $font-size-16;
+    }
+
+    p {
+        font-size: $font-size-11;
+    }
+}

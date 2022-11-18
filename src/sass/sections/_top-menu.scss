@@ -1,0 +1,164 @@
+.top-menu {
+    margin: 0;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    margin-bottom: 80px;
+
+    .container {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        @include md {
+            flex-wrap: nowrap;
+        }
+    }
+
+    .logo {
+        font-size: $font-size-35;
+        font-weight: $font-weight-bold;
+        color: $color-dark;
+    }
+
+    .navbar {
+        display: none;
+        background-color: $color-white;
+        opacity: 90%;
+        height: 100%;
+        width: 100%;
+        order: 1;
+        text-align: end;
+
+        &.d-block {
+            display: block;
+        }
+
+        .nav-item {
+            display: block;
+            margin: 0.5rem 0.5rem;
+            font-size: $font-size-16;
+            font-weight: $font-weight-medium;
+
+            @include md {
+                display: inline;
+                position: static;
+            }
+        }
+
+        .active {
+            color: $color-theme;
+        }
+
+        @include md {
+            display: inline;
+            text-align: center;
+            position: relative;
+            order: 0;
+            background-color: transparent;
+        }
+
+    }
+
+    .navbarToggle {
+        position: relative;
+
+        @include md {
+            display: none;
+        }
+    }
+
+    .menu-links {
+        gap: 10px;
+        line-height: 0;
+        padding-right: 1rem;
+
+        .badge {
+            top: -5px;
+            left: 23px;
+            transition: 0.2s ease-in-out;
+        }
+
+        menu-link-circle:hover .badge {
+            background-color: $color-dark;
+        }
+        
+    }
+
+    .search {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        cursor: pointer;
+    }
+
+    .closeBtn {
+        position: relative;
+        opacity: 0;
+        display: none;
+        font-size: $font-size-24;
+        color: $color-gray-40;
+
+        &.active {
+            opacity: 1;
+            display: inherit;
+            left: 6px;
+        }
+    }
+
+    .searchBtn {
+        position: relative;
+        transition: 0.5s ease-in-out;
+
+        &.active {
+            z-index: -2;
+        }
+    }
+
+    .searchBox {
+        position: absolute;
+        visibility: hidden;
+        right: -100%;
+        width: 98%;
+        display: flex;
+        align-items: center;
+        padding: 0 3rem;
+        transition: 0.5s ease-in-out;
+        z-index: 3;
+
+        input {
+            width: 100%;
+            border: none;
+            outline: none;
+            height: 50px;
+            border-bottom: 1px solid $color-gray-40;
+            font-size: $font-size-16;
+            padding-left: 1rem;
+        }
+
+        &.active {
+            right: -45px;
+            visibility: visible;
+
+        }
+
+        @include md {
+            position: absolute;
+            width: 100%;
+    
+            &.active {
+                right: -55px;
+                visibility: visible;
+            }
+        }
+    }
+}
+
+.top-menu-bg {
+    background-color: $color-white; 
+}
