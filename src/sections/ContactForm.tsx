@@ -1,25 +1,26 @@
 import React from 'react'
 import { useState } from 'react'
+import { IErrors, IForm } from '../models/ContactFormModels'
 
 const ContactForm = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [comments, setComments] = useState('')
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState<IErrors>({} as IErrors)
     const [submitted, setSubmitted] = useState(false)
     const [failedSubmit, setFailedSubmit] = useState(false)
 
-    const validate = (e, form = null) => {
+    const validate = (e: any, form?: IForm |null) => {
         if (e.type === 'submit') {
-         const errors = {}
-         errors.name = validate_name(form.name)
-         errors.email = validate_email(form.email)
-         errors.comments = validate_comments(form.comments)
+         const errors: IErrors = {} as IErrors
+         errors.name = validate_name(form!.name)
+         errors.email = validate_email(form!.email)
+         errors.comments = validate_comments(form!.comments)
          return errors
      
         } else {
-             const {id, value} = e.target
+             const {id, value} = e.target as HTMLInputElement
              switch(id) {
                  case 'name':
                      return validate_name(value)
@@ -29,9 +30,9 @@ const ContactForm = () => {
                      return validate_comments(value)
              }
         }
-     }
+    }
      
-     const validate_name = (value) => {
+    const validate_name = (value: string | undefined) => {
          if (!value){
              return 'Please enter your name.'
          }
@@ -39,9 +40,9 @@ const ContactForm = () => {
              return 'Please enter a name with at least 2 characters.'
          else
              return null
-     }
+    }
      
-     const validate_email = (value) => {
+    const validate_email = (value: string |undefined) => {
          const regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
          
          if (!value)
@@ -50,19 +51,19 @@ const ContactForm = () => {
              return 'Please enter a valid e-mail address (e.g. name@domain.com).'
          else
              return null
-     }
+    }
      
-     const validate_comments = (value) => {
+    const validate_comments = (value: string | undefined) => {
          if (!value)
              return 'Please write a message.'
          else if (value.length < 5)
              return 'Please enter a message with more than 5 characters.'
          else
              return null
-     }
+    }
   
-    const handleChange = (e) => {
-      const {id, value} = e.target
+    const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const {id, value} = e.target as HTMLInputElement | HTMLTextAreaElement
   
       switch(id) {
         case 'name':
@@ -79,9 +80,9 @@ const ContactForm = () => {
       setErrors({...errors, [id]: validate(e)})
     }
   
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.SyntheticEvent) => {
       e.preventDefault()
-      setErrors(validate(e, {name, email, comments}))
+      setErrors(prevErrors => ({...prevErrors, [e.currentTarget.id]: validate(e, {name, email, comments})}))
     
       if (errors.name === null && errors.email === null && errors.comments === null) {
 
