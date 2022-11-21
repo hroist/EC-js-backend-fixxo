@@ -1,4 +1,3 @@
-import { SyntheticEvent } from "react"
 
 export interface IErrors {
     name?: string | null

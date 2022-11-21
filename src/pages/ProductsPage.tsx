@@ -5,7 +5,7 @@ import SiteTitle from '../sections/SiteTitle'
 import Topmenu from '../sections/Topmenu'
 
 const ProductsPage = () => {
-  window.top.document.title = 'Fixxo. || Products '
+  document.title = 'Fixxo. || Products '
   const {products, fetchProducts} = useProductContext()
       
   useEffect(() => {

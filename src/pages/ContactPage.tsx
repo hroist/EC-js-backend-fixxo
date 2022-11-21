@@ -5,7 +5,7 @@ import SiteTitle from '../sections/SiteTitle'
 import MapSection from '../sections/MapSection'
 
 const ContactPage = () => {
-  window.top.document.title = 'Fixxo. || Contacts'
+  document.title = 'Fixxo. || Contacts'
   
   return (
     <>

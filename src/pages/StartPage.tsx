@@ -12,7 +12,7 @@ import { useProductContext } from '../contexts/ProductContext'
 import InfoIcons from '../sections/InfoIcons'
 
 const StartPage = () => {
-  window.top.document.title = 'Fixxo.'
+  document.title = 'Fixxo.'
   const {featuredProducts, fetchFeaturedProducts} = useProductContext()
 
   useEffect(() => {

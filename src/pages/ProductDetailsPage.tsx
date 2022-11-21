@@ -7,7 +7,7 @@ import SiteTitle from '../sections/SiteTitle'
 import Topmenu from '../sections/Topmenu'
 
 const ProductDetailsPage = () => {
-  window.top.document.title = 'Fixxo. || Product X'
+  document.title = 'Fixxo. || Product X'
 
   const {featuredProducts, fetchFeaturedProducts, product, fetchProduct} = useProductContext()
   const params  = useParams() 
@@ -21,7 +21,7 @@ const ProductDetailsPage = () => {
   return (
     <>
         <Topmenu />
-        <SiteTitle title={product.name} parentTitle={<li>Products</li>} />
+        <SiteTitle title={product.name} parentTitle="Products" />
         <ProductDetails item={product} />
         <ProductGrid classNameCard="text-left" classNameGrid="related-product-grid" items={featuredProducts} title="Related products" /> 
     </>

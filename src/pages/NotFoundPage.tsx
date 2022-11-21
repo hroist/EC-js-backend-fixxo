@@ -2,7 +2,7 @@ import React from 'react'
 import Topmenu from '../sections/Topmenu'
 
 const NotFoundPage = () => {
-  window.top.document.title = 'Fixxo. || Page not found'
+  document.title = 'Fixxo. || Page not found'
 
   return (
     <>

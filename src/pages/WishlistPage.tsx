@@ -2,15 +2,15 @@ import React from 'react'
 import SiteTitle from '../sections/SiteTitle'
 import Topmenu from '../sections/Topmenu'
 
-const CategoriesPage = () => {
-  window.top.document.title = 'Fixxo. || Categories'
+const WishlistPage = () => {
+  document.title = 'Fixxo. || Wishlist'
 
   return (
     <>
         <Topmenu />
-        <SiteTitle title="Categories" />
+        <SiteTitle title="Wishlist" />
     </>
   )
 }
 
-export default CategoriesPage
+export default WishlistPage

@@ -2,15 +2,15 @@ import React from 'react'
 import SiteTitle from '../sections/SiteTitle'
 import Topmenu from '../sections/Topmenu'
 
-const WishlistPage = () => {
-  window.top.document.title = 'Fixxo. || Wishlist'
+const ShoppingCartPage = () => {
+  document.title = 'Fixxo. || Shopping cart'
 
   return (
     <>
         <Topmenu />
-        <SiteTitle title="Wishlist" />
+        <SiteTitle title="Shopping cart" />
     </>
   )
 }
 
-export default WishlistPage
+export default ShoppingCartPage

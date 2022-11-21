@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 
 interface ISiteTitle {
@@ -15,7 +15,7 @@ const SiteTitle = ({title, parentTitle}:ISiteTitle) => {
             </div>
             <ul className="site-title-breadcrumb">
                 <li><NavLink to="/"><i className="fa-solid fa-house"></i> Home</NavLink></li>
-                {parentTitle}
+                {parentTitle ? <li>{parentTitle}</li> : ""}
                 <li>{title}</li>
             </ul>
         </div>
