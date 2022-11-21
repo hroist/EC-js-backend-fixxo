@@ -1,7 +1,8 @@
 import React from 'react'
 import ProductCard from '../components/ProductCard'
+import { IProductGrid } from '../models/ProductsModels'
 
-const ProductGrid = ({ title, classNameCard, classNameSection, classNameGrid, items = [] }) => {
+const ProductGrid = ({ title, classNameCard, classNameSection, classNameGrid, items = [] }:IProductGrid) => {
 
   return (
     <section className={`product-grid-container txt-c ${classNameSection}`}>

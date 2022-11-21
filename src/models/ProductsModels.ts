@@ -16,3 +16,11 @@ export interface IProducts {
 export interface IProductDetails {
     item: IProduct
 }
+
+export interface IProductGrid {
+    title?: string
+    classNameCard?: string | undefined
+    classNameSection?: string | undefined
+    classNameGrid?: string | undefined
+    items: IProduct[]
+}

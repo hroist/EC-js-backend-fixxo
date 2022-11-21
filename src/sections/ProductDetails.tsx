@@ -1,12 +1,10 @@
-import React, { MouseEvent, useState } from 'react'
+import React, { useState } from 'react'
 import ImageSlider from '../components/ImageSlider'
 import SizeButton from '../components/ui/SizeButton';
 import { useShoppingCart } from '../contexts/ShoppingCartContext';
 import { currencyFormatter } from '../utilities/currencyFormatter';
 import Dropdown from '../components/ui/Dropdown'
 import { IProductDetails } from '../models/ProductsModels';
-import { IButtonEvent } from '../models/ProductCardModel';
-
 
 const ProductDetails = ({item}:IProductDetails) => {
 

@@ -1,7 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const SiteTitle = ({title, parentTitle}) => {
+interface ISiteTitle {
+  title: string
+  parentTitle?: string
+}
+
+const SiteTitle = ({title, parentTitle}:ISiteTitle) => {
   return (
     <section className="site-title">
         <div className="container-small">
