@@ -10,6 +10,7 @@
     overflow-x: hidden;
     transition: 0.5s;
     padding: 100px 2rem;
+    box-sizing: border-box;
 
     &.open {
         width: 100%;

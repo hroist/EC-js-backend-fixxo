@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import ImageSlider from '../components/ImageSlider'
 import SizeButton from '../components/ui/SizeButton';
 import { useShoppingCart } from '../contexts/ShoppingCartContext';
 import { currencyFormatter } from '../utilities/currencyFormatter';
 import Dropdown from '../components/ui/Dropdown'
+import { IProductDetails } from '../models/ProductsModels';
+import { IButtonEvent } from '../models/ProductCardModel';
 
 
-const ProductDetails = ({item}) => {
+const ProductDetails = ({item}:IProductDetails) => {
 
     const { addMultipleItems } = useShoppingCart()
 
@@ -30,9 +32,10 @@ const ProductDetails = ({item}) => {
         }
     }
 
+
     const [productDetails, setProductDetails] = useState("product-details-description")
-    const handleProductDetails = (e) => {
-        setProductDetails(e.target.id)
+    const handleProductDetails = (e: React.MouseEvent<HTMLLIElement>) => {
+        setProductDetails((e.target as HTMLLIElement).id)
     }
 
   return (

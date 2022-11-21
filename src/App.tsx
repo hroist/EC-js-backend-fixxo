@@ -1,4 +1,4 @@
-import './App.min.css';
+import "./App.min.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import { ProductProvider } from './contexts/ProductContext';

@@ -1,16 +1,17 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useShoppingCart } from '../contexts/ShoppingCartContext'
+import { IButtonEvent, IProductCard } from '../models/ProductCardModel'
 import { currencyFormatter } from '../utilities/currencyFormatter'
 
-const ProductCard = ({item, classNameCard}) => {
+const ProductCard = ({item, classNameCard}:IProductCard) => {
 
     const { incrementQuantity } = useShoppingCart()
 
-    const addToWishlist = (e) => {
+    const addToWishlist = (e: IButtonEvent) => {
         console.log(`${e} added to wishlist`)
     }
-    const addToCompare = (e) => {
+    const addToCompare = (e: IButtonEvent) => {
         console.log("added to compare")
     }
 

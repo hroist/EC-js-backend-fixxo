@@ -1,8 +1,9 @@
 import React from 'react'
 import { useShoppingCart } from '../contexts/ShoppingCartContext'
+import { IShoppingCart, IShoppingCartItem } from '../models/ShoppingCartModels';
 import { currencyFormatter } from '../utilities/currencyFormatter';
 
-const ShoppingCartItem = ({item}) => {
+const ShoppingCartItem: React.FC<IShoppingCartItem> = ({item}) => {
     const { incrementQuantity, decrementQuantity, removeItem } = useShoppingCart();
 
   return (

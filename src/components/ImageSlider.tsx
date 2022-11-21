@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { IImageSlider } from '../models/ImageSliderModels';
 
-const ImageSlider = ({ slides }) => {
+const ImageSlider = ({ slides }:IImageSlider) => {
     const [currentIndex, setCurrentIndex] = useState(0);
   
     const slideStyles = {
@@ -24,7 +25,7 @@ const ImageSlider = ({ slides }) => {
         width: `calc( 100% / ${slides.length} )`,
     }
 
-    const goToSlide = slideIndex => {
+    const goToSlide = (slideIndex: number) => {
         setCurrentIndex(slideIndex)
     }
 

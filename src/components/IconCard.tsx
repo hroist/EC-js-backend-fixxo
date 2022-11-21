@@ -1,8 +1,14 @@
 import React from 'react'
-import MenuLinkCircle from '../components/ui/MenuLinkCircle'
+import MenuLinkCircle from './ui/MenuLinkCircle'
 
+interface IIconCard {
+  icon: string
+  link: string
+  title: string
+  text: string
+}
 
-const IconCard = ({icon, link, title, text}) => {
+const IconCard = ({icon, link, title, text}:IIconCard) => {
   return (
     <div className='info-icon-card'>
         <MenuLinkCircle icon={icon} link={link} />

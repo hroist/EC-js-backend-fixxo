@@ -1,7 +1,8 @@
 import React from 'react'
+import { IProducts } from '../models/ProductsModels'
 import ProductCard from './ProductCard'
 
-export const ProductColumn = ({items = []}) => {
+export const ProductColumn = ({items = []}:IProducts) => {
   return (
     <>
     {
