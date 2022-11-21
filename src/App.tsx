@@ -16,7 +16,7 @@ import Footer from './sections/Footer';
 
 
 
-function App() {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ShoppingCartProvider>

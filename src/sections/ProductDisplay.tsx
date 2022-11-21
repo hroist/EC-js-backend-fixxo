@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { useProductContext } from '../contexts/ProductContext'
+import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import ProductGrid from './ProductGrid'
 import { NavLink } from 'react-router-dom'
 
 const ProductDisplay = () => {
 
-    const {displayProducts, fetchDisplayProducts} = useProductContext()
+    const {displayProducts, fetchDisplayProducts} = useProductContext() as IProductContext
       
     useEffect(() => {
       fetchDisplayProducts(4)

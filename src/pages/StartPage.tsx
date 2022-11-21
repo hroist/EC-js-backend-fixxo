@@ -8,12 +8,12 @@ import ProductDisplay from '../sections/ProductDisplay'
 import SecondBanner from '../sections/SecondBanner'
 import Showcase from '../sections/Showcase'
 import ProductGrid from '../sections/ProductGrid'
-import { useProductContext } from '../contexts/ProductContext'
+import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import InfoIcons from '../sections/InfoIcons'
 
 const StartPage = () => {
   document.title = 'Fixxo.'
-  const {featuredProducts, fetchFeaturedProducts} = useProductContext()
+  const {featuredProducts, fetchFeaturedProducts} = useProductContext() as IProductContext
 
   useEffect(() => {
     fetchFeaturedProducts(8)

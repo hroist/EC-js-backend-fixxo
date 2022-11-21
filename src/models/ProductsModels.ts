@@ -1,9 +1,9 @@
 import { ReactNode } from "react"
 
 export interface IProduct {
+    articleNumber: string
     imageName: string | undefined
     category: string
-    articleNumber: string
     name: string
     price: number
     description?: string

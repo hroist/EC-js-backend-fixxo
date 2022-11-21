@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useProductContext } from '../contexts/ProductContext'
+import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import ProductDetails from '../sections/ProductDetails'
 import ProductGrid from '../sections/ProductGrid'
 import SiteTitle from '../sections/SiteTitle'
@@ -9,8 +9,8 @@ import Topmenu from '../sections/Topmenu'
 const ProductDetailsPage = () => {
   document.title = 'Fixxo. || Product X'
 
-  const {featuredProducts, fetchFeaturedProducts, product, fetchProduct} = useProductContext()
-  const params  = useParams() 
+  const {featuredProducts, fetchFeaturedProducts, product, fetchProduct} = useProductContext() as IProductContext
+  const params  = useParams()
 
   useEffect(() => {
     fetchFeaturedProducts(8)

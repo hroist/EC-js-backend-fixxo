@@ -1,11 +1,11 @@
 import React,{ useEffect } from 'react'
-import { useProductContext } from '../contexts/ProductContext'
+import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import { ProductColumn } from '../components/ProductColumn'
 
 
 const ProductColumns = () => {
 
-  const {products, fetchProducts} = useProductContext()
+  const {products, fetchProducts} = useProductContext() as IProductContext
       
     useEffect(() => {
       fetchProducts(3)

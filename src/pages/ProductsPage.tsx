@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { useProductContext } from '../contexts/ProductContext'
+import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import ProductGrid from '../sections/ProductGrid'
 import SiteTitle from '../sections/SiteTitle'
 import Topmenu from '../sections/Topmenu'
 
 const ProductsPage = () => {
   document.title = 'Fixxo. || Products '
-  const {products, fetchProducts} = useProductContext()
+  const {products, fetchProducts} = useProductContext() as IProductContext
       
   useEffect(() => {
     fetchProducts(0)
