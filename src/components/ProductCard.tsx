@@ -1,12 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { useShoppingCart } from '../contexts/ShoppingCartContext'
+import { IShoppingCartContext, useShoppingCart } from '../contexts/ShoppingCartContext'
 import { IButtonEvent, IProductCard } from '../models/ProductCardModel'
 import { currencyFormatter } from '../utilities/currencyFormatter'
 
 const ProductCard = ({item, classNameCard}:IProductCard) => {
 
-    const { incrementQuantity } = useShoppingCart()
+    const { incrementQuantity } = useShoppingCart() as IShoppingCartContext
 
     const addToWishlist = (e: IButtonEvent) => {
         console.log(`${e} added to wishlist`)
@@ -32,7 +32,7 @@ const ProductCard = ({item, classNameCard}:IProductCard) => {
                         </button>
                     </li>
                     <li>
-                        <button data-testid="cartButton" onClick={() => incrementQuantity({articleNumber: item.articleNumber, product: item})} className="menu-link-circle c-content">
+                        <button data-testid="cartButton" onClick={() => incrementQuantity({articleNumber: item.articleNumber, product: item, quantity: 1})} className="menu-link-circle c-content">
                             <i className="fa-regular fa-bag-shopping"></i>
                         </button>
                     </li>

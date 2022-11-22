@@ -10,7 +10,7 @@ export interface ISizeButton {
 
 export interface IMenuCircleBtn {
   className?: string
-  badgetext?: string
+  badgetext?: string | number
   icon: string
   onClick?: () => void
 }

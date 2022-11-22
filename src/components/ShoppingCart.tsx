@@ -1,12 +1,11 @@
 import React from 'react'
-import { useShoppingCart } from '../contexts/ShoppingCartContext'
-import { FixMeLater } from '../models/FixMeLater'
+import { IShoppingCartContext, useShoppingCart } from '../contexts/ShoppingCartContext'
 import { IShoppingCart, IShoppingCartItem } from '../models/ShoppingCartModels'
 import ShoppingCartItem from './ShoppingCartItem'
 
 
 const ShoppingCart = ({className}:IShoppingCart) => {
-    const { cartItems, toggleShoppingCart } = useShoppingCart()
+    const { cartItems, toggleShoppingCart } = useShoppingCart() as IShoppingCartContext
     
    
   return (
@@ -18,7 +17,7 @@ const ShoppingCart = ({className}:IShoppingCart) => {
             </h2>
             <div className='items-box'>
                 {
-                    cartItems.map((item:FixMeLater) => (<ShoppingCartItem key={item.articleNumber} item={item} />) )
+                    cartItems.map( item => <ShoppingCartItem key={item.articleNumber} item={item} />) 
                 }
             </div>
         </div>

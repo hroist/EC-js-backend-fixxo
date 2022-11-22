@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import ImageSlider from '../components/ImageSlider'
 import SizeButton from '../components/ui/SizeButton';
-import { useShoppingCart } from '../contexts/ShoppingCartContext';
+import { IShoppingCartContext, useShoppingCart } from '../contexts/ShoppingCartContext';
 import { currencyFormatter } from '../utilities/currencyFormatter';
 import Dropdown from '../components/ui/Dropdown'
 import { IProductDetails } from '../models/ProductsModels';
 
 const ProductDetails = ({item}:IProductDetails) => {
 
-    const { addMultipleItems } = useShoppingCart()
+    const { addMultipleItems } = useShoppingCart() as IShoppingCartContext
 
     const slides = [
         {url: item.imageName, title: item.name },
@@ -90,7 +90,7 @@ const ProductDetails = ({item}:IProductDetails) => {
                         <div className='product-details-grid'>
                             <div></div>
                             <div>
-                                <button className="button-forms" onClick={() => addMultipleItems({articleNumber: item.articleNumber, product: item}, counter)}>ADD TO CART</button>
+                                <button className="button-forms" onClick={() => addMultipleItems({articleNumber: item.articleNumber, product: item, quantity:counter}, counter)}>ADD TO CART</button>
                             </div>                           
                         </div>
                         <div className="product-details-grid">

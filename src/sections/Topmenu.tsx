@@ -3,11 +3,11 @@ import MenuLinkCircle from '../components/ui/MenuLinkCircle'
 import MenuCircleBtn from '../components/ui/MenuCircleBtn'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 import ShoppingCart from '../components/ShoppingCart'
-import { useShoppingCart } from '../contexts/ShoppingCartContext'
+import { IShoppingCartContext, useShoppingCart } from '../contexts/ShoppingCartContext'
 
 const Topmenu = () => {
 
-    const {cartQuantity, cartOpen, toggleShoppingCart} = useShoppingCart()
+    const {cartQuantity, cartOpen, toggleShoppingCart} = useShoppingCart() as IShoppingCartContext
 
     // change bg-color on scroll
     const [color, setColor] = useState(false)
