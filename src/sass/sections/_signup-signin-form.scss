@@ -1,0 +1,94 @@
+.signup-signin {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+
+    .contact-form-box {
+        display: block;
+    }
+    
+    input[type=text],
+    input[type=email],
+    input[type=password] {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0.8rem;
+        margin: 0.3rem 0;
+        border: 1px solid $color-gray-20;
+        font-family: $font-poppins;
+
+        &:focus {
+            outline-color: $color-theme;
+        }
+
+        &.error {
+            color: $color-theme;
+            border: 1px solid $color-theme !important;
+        }
+    }
+
+
+    @include md {
+        .signin-form-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1rem;
+        }
+
+        .signup-form-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1rem;
+
+            #firstName {
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+        
+            #lastName {
+                grid-column: 2 / 3;
+                grid-row: 1 / 2;
+            }
+
+            #invalid-feedback-firstName {
+                grid-column: 1 / 2;
+                grid-row: 2 / 3;
+            }
+        
+            #invalid-feedback-lastName {
+                grid-column: 2 / 3;
+                grid-row: 2 / 3;
+            }
+
+            #signup-email {
+                grid-column: 1 / 2;
+                grid-row: 3 / 4;
+            }
+        
+            #signup-password {
+                grid-column: 2 / 3;
+                grid-row: 3 / 4;
+            }
+
+            #invalid-feedback-email {
+                grid-column: 1 / 2;
+                grid-row: 4 / 5;
+            }
+        
+            #invalid-feedback-password {
+                grid-column: 2 / 3;
+                grid-row: 4 / 5;
+            }
+        }
+    }
+
+    .invalid-feedback {
+        color: $color-theme;
+        font-size: $font-size-11;
+        margin-bottom: 0.3rem;
+    }
+
+   
+
+}

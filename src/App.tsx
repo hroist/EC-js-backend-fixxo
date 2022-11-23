@@ -13,6 +13,8 @@ import ShoppingCartPage from './pages/ShoppingCartPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Footer from './sections/Footer';
+import LoginPage from "./pages/LoginPage";
+import MyAccountPage from "./pages/MyAccountPage";
 
 
 
@@ -27,6 +29,8 @@ const App: React.FC = () => {
             <Route path="/products/:id" element={<ProductDetailsPage />} />
             <Route path="/categories" element={<CategoriesPage />} />
             <Route path="/contacts" element={<ContactPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/account" element={<MyAccountPage />} />
             <Route path="/compare" element={<ComparePage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/shopping-cart" element={<ShoppingCartPage />} />

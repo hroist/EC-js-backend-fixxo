@@ -42,6 +42,7 @@ const Topmenu = () => {
                 <NavLink className="nav-item" to="/categories" end>Categories</NavLink>
                 <NavLink className="nav-item" to="/products" >Products</NavLink>
                 <NavLink className="nav-item" to="/contacts" end>Contacts</NavLink>
+                <NavLink className="nav-item" to="/login" end>Login</NavLink>
             </nav>
             <div className="menu-links sb-content">
                 <MenuLinkCircle aria-label='compare' icon="fa-regular fa-code-compare fa-flip-horizontal" link="/compare" className="collapse-sm" />    
