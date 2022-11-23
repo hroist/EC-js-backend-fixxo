@@ -25,7 +25,8 @@ export const useProductContext = () => {
 
 export const ProductProvider = ({ children }: IProductProviderProps ) => {
 
-    const url = 'https://win22-webapi.azurewebsites.net/api/products'
+    // const url = 'https://win22-webapi.azurewebsites.net/api/products'
+    const url = 'http://localhost:5000/api/products'
     const [product, setProduct] = useState<string>("")
     const [products, setProducts] = useState<IProduct[]>([])
     const [featuredProducts, setFeaturedProducts] = useState<IProduct[]>([])
