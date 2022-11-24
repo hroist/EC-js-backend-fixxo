@@ -1,11 +1,11 @@
 import React from 'react'
 import { IButton } from '../../models/uiModels'
 
-const ButtonForms = ({buttontext}:IButton) => {
+const ButtonForms = ({buttontext, onClick}:IButton) => {
   return (
-    <button className="button-forms">
-    {buttontext}
-</button>
+    <button onClick={onClick} className="button-forms">
+      {buttontext}
+    </button>
   )
 }
 

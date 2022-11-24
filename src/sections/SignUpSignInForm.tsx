@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const SignUpSignInForm = () => {
 
@@ -16,8 +17,9 @@ const SignUpSignInForm = () => {
                         <input id="signin-password" type="password" placeholder="Your password" />
                     </div>
                 </div>
-
-                <button type="submit" className="button-forms">LOG IN</button>
+                <NavLink to="/account">                
+                    <button type="submit" className="button-forms">LOG IN</button>
+                </NavLink>
             </form>
             <h1 className="form-title">. . . or sign up</h1>
             <form noValidate>

@@ -7,10 +7,16 @@ export interface IProduct {
     name: string
     price: number
     description?: string
+    rating?: number
+    featured: boolean
 }
 
 export interface IProducts {
     items: IProduct[]
+}
+
+export interface IProductListItem {
+    item: IProduct
 }
 
 export interface IProductDetails {

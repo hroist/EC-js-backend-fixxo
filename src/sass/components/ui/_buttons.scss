@@ -195,3 +195,11 @@
         color: $color-white;
     }
 }
+
+.close-btn {
+    background-color: transparent;
+    border: 1px solid $color-gray-20;
+    align-self: flex-end;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}

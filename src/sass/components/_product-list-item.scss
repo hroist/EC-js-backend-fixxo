@@ -1,0 +1,53 @@
+.list-headers {
+    display: grid;
+    grid-template-columns: 50px 150px repeat(6, minmax(0, 1fr));
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.2rem;
+
+    h1 {
+        font-size: $font-size-12;
+    }
+}
+
+.product-list-item {
+    display: grid;
+    grid-template-columns: 50px 150px repeat(6, minmax(0, 1fr));
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.2rem;
+
+    .item-image {
+        background-color: $color-gray-20;
+        height: 50px;
+        width: 50px;
+        margin-right: 5px;
+
+        img {
+          height: 50px;
+          width: 50px;
+        }
+    }
+
+    p {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: $font-size-12;
+    }
+      
+
+    button {
+        border: none; 
+        background-color: transparent;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+        color: $color-theme;
+        }
+    }
+    
+}

@@ -15,6 +15,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import Footer from './sections/Footer';
 import LoginPage from "./pages/LoginPage";
 import MyAccountPage from "./pages/MyAccountPage";
+import AdminPage from "./pages/AdminPage";
 
 
 
@@ -35,6 +36,7 @@ const App: React.FC = () => {
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/shopping-cart" element={<ShoppingCartPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </ProductProvider>

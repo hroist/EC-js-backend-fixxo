@@ -1,0 +1,31 @@
+.add-product-form {
+    margin-top: 2rem;
+    
+    input[type=text] {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0.4rem;
+        margin: 0.3rem 0;
+        border: 1px solid $color-gray-20;
+        font-family: $font-poppins;
+
+        &:focus {
+            outline-color: $color-theme;
+        }
+
+        &.error {
+            color: $color-theme;
+            border: 1px solid $color-theme !important;
+        }
+    }
+
+    .invalid-feedback {
+        color: $color-theme;
+        font-size: $font-size-11;
+        margin-bottom: 0.3rem;
+    }
+
+
+}
