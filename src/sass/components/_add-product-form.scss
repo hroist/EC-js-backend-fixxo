@@ -1,7 +1,9 @@
 .add-product-form {
     margin-top: 2rem;
     
-    input[type=text] {
+    input[type=text],
+    input[type=email],
+    input[type=password]  {
         width: 100%;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;

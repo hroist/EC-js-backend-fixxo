@@ -16,6 +16,7 @@ import Footer from './sections/Footer';
 import LoginPage from "./pages/LoginPage";
 import MyAccountPage from "./pages/MyAccountPage";
 import AdminPage from "./pages/AdminPage";
+import UserProvider from "./contexts/UserContext";
 
 
 
@@ -24,21 +25,23 @@ const App: React.FC = () => {
     <BrowserRouter>
       <ShoppingCartProvider>
         <ProductProvider>
-          <Routes>
-            <Route path="/" element={<StartPage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/products/:id" element={<ProductDetailsPage />} />
-            <Route path="/categories" element={<CategoriesPage />} />
-            <Route path="/contacts" element={<ContactPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/account" element={<MyAccountPage />} />
-            <Route path="/compare" element={<ComparePage />} />
-            <Route path="/wishlist" element={<WishlistPage />} />
-            <Route path="/shopping-cart" element={<ShoppingCartPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <UserProvider>
+            <Routes>
+              <Route path="/" element={<StartPage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/products/:id" element={<ProductDetailsPage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route path="/contacts" element={<ContactPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/account" element={<MyAccountPage />} />
+              <Route path="/compare" element={<ComparePage />} />
+              <Route path="/wishlist" element={<WishlistPage />} />
+              <Route path="/shopping-cart" element={<ShoppingCartPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/admin" element={<AdminPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </UserProvider>
         </ProductProvider>
       </ShoppingCartProvider>
       <Footer />  
