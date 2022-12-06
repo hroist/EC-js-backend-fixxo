@@ -10,14 +10,16 @@ import Showcase from '../sections/Showcase'
 import ProductGrid from '../sections/ProductGrid'
 import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import InfoIcons from '../sections/InfoIcons'
+import { IProduct } from '../models/ProductsModels'
 
 const StartPage = () => {
   document.title = 'Fixxo.'
-  const {featuredProducts, fetchFeaturedProducts} = useProductContext() as IProductContext
+  const {featuredProducts, fetchProductsByTag } = useProductContext() as IProductContext
 
   useEffect(() => {
-    fetchFeaturedProducts(8)
+    fetchProductsByTag("featured", 8)
   }, [])
+
 
   
   return (

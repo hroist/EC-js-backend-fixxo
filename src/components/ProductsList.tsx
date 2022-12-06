@@ -3,11 +3,11 @@ import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import ProductListItem from './ProductListItem'
 
 const ProductsList = () => {
-  const {products, fetchProducts} = useProductContext() as IProductContext
+  const {create, products, fetchProducts} = useProductContext() as IProductContext
       
   useEffect(() => {
       fetchProducts(0)
-  }, [])
+  }, [create])
 
   return (
     
@@ -18,7 +18,7 @@ const ProductsList = () => {
             <h1>Category</h1>
             <h1>Description</h1>
             <h1>Rating</h1>
-            <h1>Featured</h1>
+            <h1>Tag</h1>
             <h1>Price</h1>           
         </div>
         {

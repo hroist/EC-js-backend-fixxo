@@ -8,7 +8,17 @@ export interface IProduct {
     price: number
     description?: string
     rating?: number
-    featured: boolean
+    tag: string
+}
+
+export interface IProductRequest {
+    imageName: string | undefined
+    category: string
+    name: string
+    price: number
+    description?: string
+    rating?: number
+    tag: string
 }
 
 export interface IProducts {

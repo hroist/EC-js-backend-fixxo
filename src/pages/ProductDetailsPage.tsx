@@ -9,11 +9,11 @@ import Topmenu from '../sections/Topmenu'
 const ProductDetailsPage = () => {
   document.title = 'Fixxo. || Product X'
 
-  const {featuredProducts, fetchFeaturedProducts, product, fetchProduct} = useProductContext() as IProductContext
+  const {featuredProducts, fetchProductsByTag, product, fetchProduct} = useProductContext() as IProductContext
   const params  = useParams()
 
   useEffect(() => {
-    fetchFeaturedProducts(8)
+    fetchProductsByTag("featured", 8)
     fetchProduct(params.id)
   }, [])
  

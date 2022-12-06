@@ -5,11 +5,13 @@ import { NavLink } from 'react-router-dom'
 
 const ProductDisplay = () => {
 
-    const {displayProducts, fetchDisplayProducts} = useProductContext() as IProductContext
+    const {products, flashSaleProducts, fetchProductsByTag, fetchProducts} = useProductContext() as IProductContext
       
     useEffect(() => {
-      fetchDisplayProducts(4)
+      fetchProductsByTag("flash-sale", 4)
+      fetchProducts(4)
     }, [])
+
 
     return (
             <div className="container">
@@ -20,10 +22,10 @@ const ProductDisplay = () => {
                             <button className="button-theme-white">FLASH SALE</button>
                         </NavLink>
                     </div>
-                    <ProductGrid classNameCard="text-left" classNameGrid="product-display-grid" classNameSection="product-display-container" items={displayProducts} />
+                    <ProductGrid classNameCard="text-left" classNameGrid="product-display-grid" classNameSection="product-display-container" items={flashSaleProducts} />
                 </div>
                 <div className="product-grid-large">
-                    <ProductGrid classNameCard="text-left" classNameGrid="product-display-grid" classNameSection="product-display-container" items={displayProducts} />
+                    <ProductGrid classNameCard="text-left" classNameGrid="product-display-grid" classNameSection="product-display-container" items={products} />
                     <div className="display-image-large"> 
                         <h1>2 FOR USD $29</h1>
                         <NavLink to="/products">
