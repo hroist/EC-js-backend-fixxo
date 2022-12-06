@@ -5,18 +5,23 @@ import ButtonForms from '../components/ui/ButtonForms'
 import SiteTitle from '../sections/SiteTitle'
 import Topmenu from '../sections/Topmenu'
 import Modal from 'react-modal'
+import { IProductContext, useProductContext } from '../contexts/ProductContext'
 
 const MyAccountPage = () => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { setSubmitted } = useProductContext() as IProductContext
 
-  const setModalIsOpenToTrue =()=>{
+  const setModalIsOpenToTrue = () => {
       setModalIsOpen(true)
   }
 
-  const setModalIsOpenToFalse =()=>{
+  const setModalIsOpenToFalse = () =>{
     setModalIsOpen(false)
-}
+    setSubmitted(false)
+  }
+
+
 
 const customStyles = {
   overlay: {
@@ -38,7 +43,7 @@ const customStyles = {
       <SiteTitle title="My account" />
       <div className="container-small">
         <ButtonForms onClick={setModalIsOpenToTrue} buttontext='ADD NEW PRODUCT'/>
-        <Modal appElement={document.getElementById('root') as HTMLElement} style={customStyles} isOpen={modalIsOpen} onRequestClose={()=> setModalIsOpen(false)}>
+        <Modal appElement={document.getElementById('root') as HTMLElement} style={customStyles} isOpen={modalIsOpen} onRequestClose={setModalIsOpenToFalse}>
                 <button className='close-btn' onClick={setModalIsOpenToFalse}>x</button>
                 <AddProductForm/>
         </Modal>

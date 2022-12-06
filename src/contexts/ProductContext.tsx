@@ -19,6 +19,9 @@ export interface IProductContext {
     setProductRequest: React.Dispatch<React.SetStateAction<IProductRequest>>
     create: (e: React.FormEvent) => void
     update: (e: React.FormEvent) => void
+    remove: (articleNumber: string) => void
+    submitted: boolean
+    setSubmitted: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface IProductProviderProps {
@@ -48,6 +51,7 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
     const [topReactedProducts, setTopReactedProducts] = useState<IProduct[]>([])
 
     const [productRequest, setProductRequest] = useState<IProductRequest>(productRequest_default)
+    const [submitted, setSubmitted] = useState<boolean>(false)
 
 
     // CREATE PRODUCT
@@ -62,10 +66,12 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
             body: JSON.stringify(productRequest)
         })
     
-        if (result.status === 201)
+        if (result.status === 201){
             setProductRequest(productRequest_default)
-        else
+            setSubmitted(true)
+        } else {
             console.log("error")
+        }
       }
 
     // GET PRODUCTS
@@ -118,7 +124,7 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
     // UPDATE PRODUCT
     const update = async (e: React.FormEvent) => {
         e.preventDefault()
-    
+
         const result = await fetch(`${url}/${product.articleNumber}`, {
             method: 'put',
             headers: {
@@ -127,21 +133,46 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
             body: JSON.stringify(product)
         })
     
-        if (result.status === 200)
+        if (result.status === 200){
             setProduct(await result.json())
-      }
+            setSubmitted(true)
+        }
+    }
 
 
     // DELETE PRODUCT
-
-
-
-
-
+    const remove = async (articleNumber: string) => {
+        const result = await fetch(`${url}/${articleNumber}`, {
+            method: 'delete',
+        })
+    
+        if (result.status === 204)
+            setProduct(product_default)
+      }
 
 
     return (
-        <ProductContext.Provider value={{ product, setProduct, products, filteredProducts, featuredProducts, flashSaleProducts, bestSellingProducts, latestProducts, topReactedProducts, fetchProduct, fetchProducts, fetchProductsByTag, create, update, productRequest, setProductRequest }}>
+        <ProductContext.Provider value={{ 
+                product, 
+                setProduct, 
+                products, 
+                filteredProducts, 
+                featuredProducts, 
+                flashSaleProducts, 
+                bestSellingProducts, 
+                latestProducts, 
+                topReactedProducts, 
+                fetchProduct, 
+                fetchProducts, 
+                fetchProductsByTag, 
+                create, 
+                update,
+                remove, 
+                productRequest, 
+                setProductRequest, 
+                submitted,
+                setSubmitted
+                }}>
             {children}
         </ProductContext.Provider>
     );

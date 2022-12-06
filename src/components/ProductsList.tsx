@@ -3,11 +3,11 @@ import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import ProductListItem from './ProductListItem'
 
 const ProductsList = () => {
-  const {create, products, fetchProducts} = useProductContext() as IProductContext
+  const {create, update, products, fetchProducts} = useProductContext() as IProductContext
       
   useEffect(() => {
       fetchProducts(0)
-  }, [create])
+  }, [create, update])
 
   return (
     
