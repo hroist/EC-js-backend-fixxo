@@ -14,6 +14,7 @@ const MyAccountPage = () => {
 
   const setModalIsOpenToTrue = () => {
       setModalIsOpen(true)
+      setSubmitted(false)
   }
 
   const setModalIsOpenToFalse = () =>{

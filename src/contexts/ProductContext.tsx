@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import { FixMeLater } from "../models/FixMeLater";
 import { IProduct, IProductRequest } from "../models/ProductsModels";
 
 export interface IProductContext {
     product: IProduct
     setProduct: React.Dispatch<React.SetStateAction<IProduct>>
     products: IProduct[]
+    setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>
     filteredProducts: IProduct[]
     featuredProducts: IProduct[]
     flashSaleProducts: IProduct[]
@@ -134,8 +134,10 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         })
     
         if (result.status === 200){
-            setProduct(await result.json())
+            console.log("status 200")
             setSubmitted(true)
+            setProduct(await result.json())
+
         }
     }
 
@@ -148,6 +150,7 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
     
         if (result.status === 204)
             setProduct(product_default)
+            setSubmitted(true)
       }
 
 
@@ -155,7 +158,8 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         <ProductContext.Provider value={{ 
                 product, 
                 setProduct, 
-                products, 
+                products,
+                setProducts,
                 filteredProducts, 
                 featuredProducts, 
                 flashSaleProducts, 

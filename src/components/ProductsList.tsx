@@ -3,11 +3,12 @@ import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import ProductListItem from './ProductListItem'
 
 const ProductsList = () => {
-  const {setSubmitted, products, fetchProducts} = useProductContext() as IProductContext
+  const ProductContext = useProductContext() as IProductContext
       
   useEffect(() => {
-    fetchProducts(0)
-  }, [setSubmitted])
+    ProductContext.fetchProducts(0)
+    console.log("useEffect runs")
+  }, [ProductContext.submitted])
 
   return (
     
@@ -22,7 +23,7 @@ const ProductsList = () => {
             <h1>Price</h1>           
         </div>
         {
-            products.map(product => <ProductListItem key={product.articleNumber} item={product} />)
+            ProductContext.products.map(product => <ProductListItem key={product.articleNumber} item={product} />)
         }
     </div>                     
   )
