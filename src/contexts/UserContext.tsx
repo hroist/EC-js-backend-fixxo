@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext } from 'react'
+import React, { useContext, useState, createContext, FormEvent } from 'react'
 
 export interface IUserContext {
     user: IUser
@@ -6,7 +6,10 @@ export interface IUserContext {
     userRequest: IUserRequest
     setUserRequest:  React.Dispatch<React.SetStateAction<IUserRequest>>
     users : IUser[]
-    create: (e: React.FormEvent) => void
+    createUser: (e: React.FormEvent) => void
+    handleSignIn: (e: React.FormEvent) => void
+    userSignin:IUserSignin 
+    setUserSignin: React.Dispatch<React.SetStateAction<IUserSignin>> 
     get: (id: number) => void
     getAll: () => void
     update: (e: React.FormEvent) => void
@@ -28,6 +31,11 @@ export interface IUserRequest {
     password: string    
 }
 
+export interface IUserSignin {
+    email: string
+    password: string
+}
+
 export interface IUserProviderProps {
     children : any
 }
@@ -43,11 +51,13 @@ const UserProvider = ({children}:IUserProviderProps) => {
   const [user, setUser] = useState<IUser>(user_default)
   const [userRequest, setUserRequest] = useState<IUserRequest>(userRequest_default)
   const [users, setUsers] = useState<IUser[]>([])
+  const [userSignin, setUserSignin] = useState<IUserSignin>( {email: "", password: ""})
 
-  const create = async (e: React.FormEvent) => {
+
+  const createUser = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const result = await fetch(`${apiUrl}`, {
+    const result = await fetch('http://localhost:5000/api/auth/signup', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -60,6 +70,29 @@ const UserProvider = ({children}:IUserProviderProps) => {
     else
         console.log("error")
   }
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const result = await fetch('http://localhost:5000/api/auth/signin', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userSignin)
+    })
+
+    const data = await result.json()
+    console.log(data)
+
+    localStorage.setItem('accessToken', data.accessToken)
+
+    if (result.status === 200)
+        setUserSignin({email: "", password: ""})
+        
+    else
+        console.log("error")
+   }
 
   const get = async (id: number) => {
     const result = await fetch(`${apiUrl}/${id}`)
@@ -98,7 +131,7 @@ const UserProvider = ({children}:IUserProviderProps) => {
   }
 
   return (
-    <UserContext.Provider value={{user, setUser, userRequest, setUserRequest, users, create, get, getAll, update, remove}}>
+    <UserContext.Provider value={{user, setUser, userRequest, setUserRequest, users, createUser, handleSignIn, userSignin, setUserSignin, get, getAll, update, remove}}>
         {children}
     </UserContext.Provider>
   )

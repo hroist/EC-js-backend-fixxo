@@ -5,27 +5,27 @@ import { IUserContext, UserContext } from '../contexts/UserContext'
 
 const SignUpSignInForm = () => {
     
-  const { userRequest, setUserRequest, create } = React.useContext(UserContext) as IUserContext
+  const { userRequest, setUserRequest, createUser, handleSignIn, userSignin, setUserSignin } = React.useContext(UserContext) as IUserContext
 
   return (
     <section className="signup-signin">
         <div className="container-small">
         <h1 className="form-title">Sign in . . .</h1>
-            <form>
+
+            <form onSubmit={handleSignIn}>
                 <div className="signin-form-box">
                     <div>
-                        <input id="signin-email" type="email" placeholder="Your email" />
+                        <input id="signin-email" value={userSignin.email} onChange={(e) => setUserSignin({...userSignin, email: e.target.value})} type="email" placeholder="Your email" />
                     </div>
                     <div>
-                        <input id="signin-password" type="password" placeholder="Your password" />
+                        <input id="signin-password" value={userSignin.password} onChange={(e) => setUserSignin({...userSignin, password: e.target.value})} type="password" placeholder="Your password" />
                     </div>
-                </div>
-                <NavLink to="/account">                
-                    <button type="submit" className="button-forms">LOG IN</button>
-                </NavLink>
+                </div>             
+                <button type="submit" className="button-forms">LOG IN</button>
             </form>
+
             <h1 className="form-title">. . . or sign up</h1>
-            <form onSubmit={create}>
+            <form onSubmit={createUser}>
                 <div className="signup-form-box">
                     <div>
                         <input id="firstName" value={userRequest.firstName} onChange={(e) => setUserRequest({...userRequest, firstName: e.target.value})} type="text" className="" placeholder='First name'></input>

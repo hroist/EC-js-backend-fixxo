@@ -3,10 +3,10 @@ import { IUserContext, UserContext } from '../contexts/UserContext'
 
 const AddUserForm = () => {
 
-  const { userRequest, setUserRequest, create } = React.useContext(UserContext) as IUserContext
+  const { userRequest, setUserRequest, createUser } = React.useContext(UserContext) as IUserContext
 
   return (
-    <form onSubmit={create} className="add-product-form">  
+    <form onSubmit={createUser} className="add-product-form">  
         <h3>Create new user</h3>
         <input value={userRequest.firstName} onChange={(e) => setUserRequest({...userRequest, firstName: e.target.value})} type="text" className="" placeholder='First name'></input>
         <input value={userRequest.lastName} onChange={(e) => setUserRequest({...userRequest, lastName: e.target.value})} type="text" className="" placeholder='Last name'></input>
