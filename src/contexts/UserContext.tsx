@@ -1,4 +1,5 @@
 import React, { useContext, useState, createContext, FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export interface IUserContext {
     user: IUser
@@ -8,13 +9,13 @@ export interface IUserContext {
     users : IUser[]
     createUser: (e: React.FormEvent) => void
     handleSignIn: (e: React.FormEvent) => void
-    userSignin:IUserSignin 
+    userSignin: IUserSignin 
     setUserSignin: React.Dispatch<React.SetStateAction<IUserSignin>> 
     get: (id: number) => void
     getAll: () => void
     update: (e: React.FormEvent) => void
     remove: (id: number) => void
-    
+    userCreated: boolean
 }
 
 export interface IUser {
@@ -47,13 +48,14 @@ const UserProvider = ({children}:IUserProviderProps) => {
   const apiUrl = 'http://localhost:5000/api/users'
   const user_default: IUser = { id: 0, firstName: "", lastName: "", email: ""}
   const userRequest_default: IUserRequest = { firstName: '', lastName: '', email: '', password: ''}
+  const navigate = useNavigate()
 
   const [user, setUser] = useState<IUser>(user_default)
   const [userRequest, setUserRequest] = useState<IUserRequest>(userRequest_default)
   const [users, setUsers] = useState<IUser[]>([])
   const [userSignin, setUserSignin] = useState<IUserSignin>( {email: "", password: ""})
-
-
+  const [userCreated, setUserCreated] = useState<boolean>(false)
+  
   const createUser = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -65,9 +67,10 @@ const UserProvider = ({children}:IUserProviderProps) => {
         body: JSON.stringify(userRequest)
     })
 
-    if (result.status === 201)
+    if (result.status === 201) {
         setUserRequest(userRequest_default)
-    else
+        setUserCreated(true)
+    } else
         console.log("error")
   }
 
@@ -87,10 +90,10 @@ const UserProvider = ({children}:IUserProviderProps) => {
 
     localStorage.setItem('accessToken', data.accessToken)
 
-    if (result.status === 200)
+    if (result.status === 200){
         setUserSignin({email: "", password: ""})
-        
-    else
+        navigate('/account', {replace: true})
+    } else
         console.log("error")
    }
 
@@ -131,7 +134,7 @@ const UserProvider = ({children}:IUserProviderProps) => {
   }
 
   return (
-    <UserContext.Provider value={{user, setUser, userRequest, setUserRequest, users, createUser, handleSignIn, userSignin, setUserSignin, get, getAll, update, remove}}>
+    <UserContext.Provider value={{user, setUser, userRequest, setUserRequest, users, createUser, userCreated, handleSignIn, userSignin, setUserSignin, get, getAll, update, remove}}>
         {children}
     </UserContext.Provider>
   )

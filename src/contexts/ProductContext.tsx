@@ -61,7 +61,8 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         const result = await fetch(`${url}`, {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(productRequest)
         })
@@ -128,7 +129,8 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         const result = await fetch(`${url}/${product.articleNumber}`, {
             method: 'put',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(product)
         })
@@ -137,7 +139,6 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
             console.log("status 200")
             setSubmitted(true)
             setProduct(await result.json())
-
         }
     }
 
@@ -146,6 +147,9 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
     const remove = async (articleNumber: string) => {
         const result = await fetch(`${url}/${articleNumber}`, {
             method: 'delete',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            }
         })
     
         if (result.status === 204)
