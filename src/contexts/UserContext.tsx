@@ -11,15 +11,18 @@ export interface IUserContext {
     handleSignIn: (e: React.FormEvent) => void
     userSignin: IUserSignin 
     setUserSignin: React.Dispatch<React.SetStateAction<IUserSignin>> 
-    get: (id: number) => void
+    loggedIn: boolean
+    setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
+    checkLoggedIn: () => void 
+    get: (id: string) => void
     getAll: () => void
-    update: (e: React.FormEvent) => void
-    remove: (id: number) => void
+    remove: (id: string) => void
     userCreated: boolean
+    thisUserId: string
 }
 
 export interface IUser {
-    id: number
+    _id: string
     firstName: string
     lastName: string 
     email: string 
@@ -46,7 +49,7 @@ export const useUserContext = () => { return useContext(UserContext)}
 
 const UserProvider = ({children}:IUserProviderProps) => {
   const apiUrl = 'http://localhost:5000/api/users'
-  const user_default: IUser = { id: 0, firstName: "", lastName: "", email: ""}
+  const user_default: IUser = { _id: "", firstName: "", lastName: "", email: ""}
   const userRequest_default: IUserRequest = { firstName: '', lastName: '', email: '', password: ''}
   const navigate = useNavigate()
 
@@ -55,6 +58,9 @@ const UserProvider = ({children}:IUserProviderProps) => {
   const [users, setUsers] = useState<IUser[]>([])
   const [userSignin, setUserSignin] = useState<IUserSignin>( {email: "", password: ""})
   const [userCreated, setUserCreated] = useState<boolean>(false)
+  const [loggedIn, setLoggedIn] = useState<boolean>(false)
+  const [thisUserId, setThisUserId] = useState<string>('')
+
   
   const createUser = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -75,29 +81,47 @@ const UserProvider = ({children}:IUserProviderProps) => {
   }
 
   const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault()
+        e.preventDefault()
 
-    const result = await fetch('http://localhost:5000/api/auth/signin', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userSignin)
-    })
+        const result = await fetch('http://localhost:5000/api/auth/signin', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userSignin)
+        })
 
-    const data = await result.json()
-    console.log(data)
+        const data = await result.json()
 
-    localStorage.setItem('accessToken', data.accessToken)
+        localStorage.setItem('accessToken', data.accessToken)
+        setLoggedIn(true)
 
-    if (result.status === 200){
-        setUserSignin({email: "", password: ""})
-        navigate('/account', {replace: true})
-    } else
-        console.log("error")
-   }
+        if (result.status === 200){
 
-  const get = async (id: number) => {
+            const parseJWT:any = (token:any) => {
+                if (!token) { return; }
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse(window.atob(base64));
+            }
+            setThisUserId(parseJWT(data.accessToken).id)
+            setUserSignin({email: "", password: ""})
+            navigate('/account', {replace: true})
+        } else
+            console.log("error")
+    }
+
+   const checkLoggedIn = () => {
+        if (localStorage.getItem('accessToken')) {
+            setLoggedIn(true)
+        } else {
+            setLoggedIn(false)
+            localStorage.removeItem('accessToken')
+            setThisUserId('')
+        }
+    }
+
+  const get = async (id: string) => {
     const result = await fetch(`${apiUrl}/${id}`)
     if (result.status === 200)
         setUser(await result.json())
@@ -108,33 +132,36 @@ const UserProvider = ({children}:IUserProviderProps) => {
     if (result.status === 200)
         setUsers(await result.json())
   }
-
-  const update = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    const result = await fetch(`${apiUrl}/${user.id}`, {
-        method: 'put',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-
-    if (result.status === 200)
-        setUser(await result.json())
-  }
   
-  const remove = async (id: number) => {
+  const remove = async (id: string) => {
     const result = await fetch(`${apiUrl}/${id}`, {
         method: 'delete',
     })
 
     if (result.status === 204)
+        console.log("user deleted")
         setUser(user_default)
+        console.log(`User with ID ${id} removed`)
   }
 
   return (
-    <UserContext.Provider value={{user, setUser, userRequest, setUserRequest, users, createUser, userCreated, handleSignIn, userSignin, setUserSignin, get, getAll, update, remove}}>
+    <UserContext.Provider value={{  user, 
+                                    setUser, 
+                                    userRequest, 
+                                    setUserRequest, 
+                                    users, 
+                                    createUser, 
+                                    userCreated, 
+                                    handleSignIn, 
+                                    userSignin, 
+                                    setUserSignin,
+                                    loggedIn,
+                                    setLoggedIn,
+                                    checkLoggedIn,
+                                    thisUserId,
+                                    get, 
+                                    getAll, 
+                                    remove}}>
         {children}
     </UserContext.Provider>
   )

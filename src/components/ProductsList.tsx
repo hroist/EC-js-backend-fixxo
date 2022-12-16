@@ -7,7 +7,6 @@ const ProductsList = () => {
       
   useEffect(() => {
     ProductContext.fetchProducts(0)
-    console.log("useEffect runs")
   }, [ProductContext.submitted])
 
   return (

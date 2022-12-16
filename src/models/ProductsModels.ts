@@ -11,6 +11,17 @@ export interface IProduct {
     tag: string
 }
 
+export interface IGQLProduct {
+    _id: string
+    imageName: string | undefined
+    category: string
+    name: string
+    price: number
+    description?: string
+    rating?: number
+    tag: string
+}
+
 export interface IProductRequest {
     imageName: string | undefined
     category: string

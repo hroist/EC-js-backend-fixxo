@@ -1,11 +1,14 @@
-import React, { useState, useContext } from "react";
-import { IProduct, IProductRequest } from "../models/ProductsModels";
+import React, { useState, useContext, useEffect } from "react";
+import { IProduct, IGQLProduct, IProductRequest } from "../models/ProductsModels";
+import { useQuery, gql, QueryResult, OperationVariables } from "@apollo/client";
 
 export interface IProductContext {
     product: IProduct
     setProduct: React.Dispatch<React.SetStateAction<IProduct>>
     products: IProduct[]
     setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>
+    GQLproducts: IProduct[]
+    getProductsQuery: QueryResult<IGQLProduct, OperationVariables>
     filteredProducts: IProduct[]
     featuredProducts: IProduct[]
     flashSaleProducts: IProduct[]
@@ -14,6 +17,7 @@ export interface IProductContext {
     topReactedProducts: IProduct[]
     fetchProduct: ( articleNumber: string |undefined ) => void
     fetchProducts: (take: number) => void
+    getProductsGQL: () => void
     fetchProductsByTag: (tag: string, take?: number) => void
     productRequest: IProductRequest
     setProductRequest: React.Dispatch<React.SetStateAction<IProductRequest>>
@@ -43,6 +47,7 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
 
     const [product, setProduct] = useState<IProduct>(product_default)
     const [products, setProducts] = useState<IProduct[]>([])
+    const [GQLproducts, setGQLProducts] = useState<IProduct[]>([])
     const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
     const [featuredProducts, setFeaturedProducts] = useState<IProduct[]>([])
     const [flashSaleProducts, setFlashSaleProducts] = useState<IProduct[]>([])
@@ -70,12 +75,32 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         if (result.status === 201){
             setProductRequest(productRequest_default)
             setSubmitted(true)
+            console.log(`Product created`)
         } else {
             console.log("error")
         }
       }
 
     // GET PRODUCTS
+
+    // with GraphQL (get all products)
+    
+    const GET_PRODUCTS_QUERY = gql`{ products { _id, name, price, description, tag, category, price, rating, imageName }}`
+    const getProductsQuery = useQuery(GET_PRODUCTS_QUERY, {pollInterval: 500})
+  
+    const getProductsGQL = () => {
+        
+        if(getProductsQuery.loading) return console.log("loading...")
+        if(getProductsQuery.error) return console.log("Error")
+        else {
+            const result:IGQLProduct[] = getProductsQuery.data.products
+            const res_products:IProduct[] = result.map(item => ({...item, articleNumber: item._id}))
+            setGQLProducts(res_products)
+        }
+        
+    }
+
+    // with Express JS API (get by tag and ID)
     const fetchProduct = async (articleNumber: string | undefined) => {
         const result = await fetch(url + `/${articleNumber}`)
         setProduct(await result.json())
@@ -87,37 +112,30 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
     }
 
     const fetchProductsByTag = async ( tag = "", take = 0) => {
-        console.log("running fetch products by tag")
         
         if (tag == "featured") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setFeaturedProducts(await result.json())
-            console.log("setting featured products")
 
         } else if (tag == "flash-sale") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setFlashSaleProducts(await result.json())
-            console.log("setting flash-sale products")
 
         } else if (tag == "best-selling") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setBestSellingProducts(await result.json())
-            console.log("setting best selling products")
 
         } else if (tag == "latest") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setLatestProducts(await result.json())
-            console.log("setting latest products")
 
         } else if (tag == "top-reacted") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setTopReactedProducts(await result.json())
-            console.log("setting topreacted products")
 
         } else {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setFilteredProducts(await result.json())
-            console.log("setting filtered products")
         }
     }
     
@@ -136,7 +154,7 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         })
     
         if (result.status === 200){
-            console.log("status 200")
+            console.log("Status 200 - Product updated")
             setSubmitted(true)
             setProduct(await result.json())
         }
@@ -164,6 +182,7 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
                 setProduct, 
                 products,
                 setProducts,
+                GQLproducts,
                 filteredProducts, 
                 featuredProducts, 
                 flashSaleProducts, 
@@ -171,7 +190,9 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
                 latestProducts, 
                 topReactedProducts, 
                 fetchProduct, 
-                fetchProducts, 
+                fetchProducts,
+                getProductsGQL,
+                getProductsQuery,
                 fetchProductsByTag, 
                 create, 
                 update,

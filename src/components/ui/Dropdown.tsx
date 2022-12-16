@@ -31,18 +31,6 @@ const Dropdown = ({colors = []}:IDropdown) => {
         </div>
     )
 
-        // return (
-        //     <>
-        //         <label hidden htmlFor="colors">Choose a color</label>
-        //         <select name="colors" className="dropdown sb-content" data-testid="dropdown-options" >
-        //             <option className="dropdown-option" >Choose a color</option>
-        //             {
-                        
-        //                 colors.map(color => <><option key={color} className="dropdown-option" >{color} </option></>)
-        //             }
-        //         </select>
-        //     </>
-        // )
 }
 
 export default Dropdown

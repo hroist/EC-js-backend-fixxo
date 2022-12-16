@@ -4,10 +4,12 @@ import MenuCircleBtn from '../components/ui/MenuCircleBtn'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 import ShoppingCart from '../components/ShoppingCart'
 import { IShoppingCartContext, useShoppingCart } from '../contexts/ShoppingCartContext'
+import { IUserContext, UserContext } from '../contexts/UserContext'
 
 const Topmenu = () => {
 
     const {cartQuantity, cartOpen, toggleShoppingCart} = useShoppingCart() as IShoppingCartContext
+    const { thisUserId } = React.useContext(UserContext) as IUserContext
 
     // change bg-color on scroll
     const [color, setColor] = useState(false)
@@ -42,7 +44,12 @@ const Topmenu = () => {
                 <NavLink className="nav-item" to="/categories" end>Categories</NavLink>
                 <NavLink className="nav-item" to="/products" >Products</NavLink>
                 <NavLink className="nav-item" to="/contacts" end>Contacts</NavLink>
-                <NavLink className="nav-item" to="/login" end>Login</NavLink>
+                { 
+                    thisUserId === '' ? 
+                    <NavLink className="nav-item" to="/login" end>Login</NavLink> 
+                    :
+                    <NavLink className="nav-item" to="/account" end>My account{}</NavLink>
+                }
             </nav>
             <div className="menu-links sb-content">
                 <MenuLinkCircle aria-label='compare' icon="fa-regular fa-code-compare fa-flip-horizontal" link="/compare" className="collapse-sm" />    

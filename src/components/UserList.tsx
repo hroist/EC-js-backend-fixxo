@@ -9,17 +9,19 @@ const UserList = () => {
 
   useEffect(() => {
     getAll()
-  }, [getAll])
+  }, [])
 
-  const removeUser = (id:number) => {
+  const removeUser = (id:string) => {
     remove(id)
   }
+
+  console.log(users)
 
   return (
     <>
         <h3>List of users</h3>
         {
-            users.map((user: IUser) => (<div onClick={() => removeUser(user.id)} key={user.id}>{user.firstName} {user.lastName} {user.email}</div>) )
+            users.map((user: IUser) => (<div onClick={() => removeUser(user._id)} key={user._id}> {user.firstName} {user.lastName} {user.email}</div>) )
         }
     </>
   )
