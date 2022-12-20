@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext, FormEvent } from 'react'
+import React, { useContext, useState, createContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export interface IUserContext {
@@ -19,6 +19,7 @@ export interface IUserContext {
     remove: (id: string) => void
     userCreated: boolean
     thisUserId: string
+    failedAuth: boolean
 }
 
 export interface IUser {
@@ -60,27 +61,31 @@ const UserProvider = ({children}:IUserProviderProps) => {
   const [userCreated, setUserCreated] = useState<boolean>(false)
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
   const [thisUserId, setThisUserId] = useState<string>('')
+  const [failedAuth, setFailedAuth] = useState<boolean>(false)
 
-  
-  const createUser = async (e: React.FormEvent) => {
-    e.preventDefault()
 
-    const result = await fetch('http://localhost:5000/api/auth/signup', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userRequest)
-    })
+    // CREATE USER
+    const createUser = async (e: React.FormEvent) => {
+        e.preventDefault()
 
-    if (result.status === 201) {
-        setUserRequest(userRequest_default)
-        setUserCreated(true)
-    } else
-        console.log("error")
-  }
+        const result = await fetch('http://localhost:5000/api/auth/signup', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userRequest)
+        })
 
-  const handleSignIn = async (e: React.FormEvent) => {
+        if (result.status === 201) {
+            setUserRequest(userRequest_default)
+            setUserCreated(true)
+        } else
+            console.log("error")
+            setUserCreated(false)
+    }
+
+    // SIGN IN
+    const handleSignIn = async (e: React.FormEvent) => {
         e.preventDefault()
 
         const result = await fetch('http://localhost:5000/api/auth/signin', {
@@ -106,12 +111,15 @@ const UserProvider = ({children}:IUserProviderProps) => {
             }
             setThisUserId(parseJWT(data.accessToken).id)
             setUserSignin({email: "", password: ""})
+            setFailedAuth(false)
             navigate('/account', {replace: true})
         } else
             console.log("error")
+            setFailedAuth(true)
     }
 
-   const checkLoggedIn = () => {
+    // CHECK IF USER IS LOGGED IN
+    const checkLoggedIn = () => {
         if (localStorage.getItem('accessToken')) {
             setLoggedIn(true)
         } else {
@@ -121,28 +129,31 @@ const UserProvider = ({children}:IUserProviderProps) => {
         }
     }
 
-  const get = async (id: string) => {
-    const result = await fetch(`${apiUrl}/${id}`)
-    if (result.status === 200)
-        setUser(await result.json())
-  }
+    // GET USER
+    const get = async (id: string) => {
+        const result = await fetch(`${apiUrl}/${id}`)
+        if (result.status === 200)
+            setUser(await result.json())
+    }
 
-  const getAll = async () => {
-    const result = await fetch(`${apiUrl}`)
-    if (result.status === 200)
-        setUsers(await result.json())
-  }
-  
-  const remove = async (id: string) => {
-    const result = await fetch(`${apiUrl}/${id}`, {
-        method: 'delete',
-    })
+    // GET ALL USERS
+    const getAll = async () => {
+        const result = await fetch(`${apiUrl}`)
+        if (result.status === 200)
+            setUsers(await result.json())
+    }
+    
+    // DELETE USER
+    const remove = async (id: string) => {
+        const result = await fetch(`${apiUrl}/${id}`, {
+            method: 'delete',
+        })
 
-    if (result.status === 204)
-        console.log("user deleted")
-        setUser(user_default)
-        console.log(`User with ID ${id} removed`)
-  }
+        if (result.status === 204)
+            console.log("user deleted")
+            setUser(user_default)
+            console.log(`User with ID ${id} removed`)
+    }
 
   return (
     <UserContext.Provider value={{  user, 
@@ -161,7 +172,8 @@ const UserProvider = ({children}:IUserProviderProps) => {
                                     thisUserId,
                                     get, 
                                     getAll, 
-                                    remove}}>
+                                    remove,
+                                    failedAuth}}>
         {children}
     </UserContext.Provider>
   )

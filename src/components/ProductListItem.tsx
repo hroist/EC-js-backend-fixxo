@@ -12,7 +12,8 @@ const ProductListItem = ({item}:IProductListItem) => {
 
 
   const setModalIsOpenToTrue =()=>{
-      setModalIsOpen(true)
+    setSubmitted(false)
+    setModalIsOpen(true)
   }
 
   const setModalIsOpenToFalse =()=>{

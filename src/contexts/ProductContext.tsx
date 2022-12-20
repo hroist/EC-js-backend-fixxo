@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { IProduct, IGQLProduct, IProductRequest } from "../models/ProductsModels";
 import { useQuery, gql, QueryResult, OperationVariables } from "@apollo/client";
 
@@ -62,7 +62,10 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
     // CREATE PRODUCT
     const create = async (e: React.FormEvent) => {
         e.preventDefault()
-    
+        
+        const validation = e.target
+        console.log(validation)
+
         const result = await fetch(`${url}`, {
             method: 'post',
             headers: {
@@ -113,23 +116,23 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
 
     const fetchProductsByTag = async ( tag = "", take = 0) => {
         
-        if (tag == "featured") {
+        if (tag === "featured") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setFeaturedProducts(await result.json())
 
-        } else if (tag == "flash-sale") {
+        } else if (tag === "flash-sale") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setFlashSaleProducts(await result.json())
 
-        } else if (tag == "best-selling") {
+        } else if (tag === "best-selling") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setBestSellingProducts(await result.json())
 
-        } else if (tag == "latest") {
+        } else if (tag === "latest") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setLatestProducts(await result.json())
 
-        } else if (tag == "top-reacted") {
+        } else if (tag === "top-reacted") {
             let result = await fetch(url + `?tag=${tag}&take=${take}`);
             setTopReactedProducts(await result.json())
 
@@ -160,7 +163,6 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         }
     }
 
-
     // DELETE PRODUCT
     const remove = async (articleNumber: string) => {
         const result = await fetch(`${url}/${articleNumber}`, {
@@ -173,7 +175,8 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
         if (result.status === 204)
             setProduct(product_default)
             setSubmitted(true)
-      }
+            console.log("Product deleted")
+    }
 
 
     return (

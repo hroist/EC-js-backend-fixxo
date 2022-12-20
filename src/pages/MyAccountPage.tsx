@@ -13,7 +13,7 @@ const MyAccountPage = () => {
   
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { setSubmitted } = useProductContext() as IProductContext
-  const { thisUserId, get, user, checkLoggedIn, loggedIn, setLoggedIn } = React.useContext(UserContext) as IUserContext
+  const { thisUserId, get, user, checkLoggedIn, loggedIn } = React.useContext(UserContext) as IUserContext
 
   const setModalIsOpenToTrue = () => {
       setModalIsOpen(true)

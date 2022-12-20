@@ -2,34 +2,34 @@ import { ReactNode } from "react"
 
 export interface IProduct {
     articleNumber: string
-    imageName: string | undefined
+    imageName?: string | undefined
     category: string
     name: string
     price: number
     description?: string
     rating?: number
-    tag: string
+    tag?: string
 }
 
 export interface IGQLProduct {
     _id: string
-    imageName: string | undefined
+    imageName?: string | undefined
     category: string
     name: string
     price: number
     description?: string
     rating?: number
-    tag: string
+    tag?: string
 }
 
 export interface IProductRequest {
-    imageName: string | undefined
+    imageName?: string | undefined
     category: string
     name: string
     price: number
     description?: string
     rating?: number
-    tag: string
+    tag?: string
 }
 
 export interface IProducts {
