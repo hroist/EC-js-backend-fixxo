@@ -4,7 +4,9 @@ import { IProductContext, useProductContext } from '../contexts/ProductContext'
 const AddProductForm = () => {
 
   const { productRequest, setProductRequest, create, submitted } = useProductContext() as IProductContext
+  const [errors, setErrors] = useState({name: "d-none", category: "d-none", price: "d-none"})
 
+  // Validate input (required fields only)
   const validate_string = (value: string) => {
     if (value.length > 1) 
         return null
@@ -15,8 +17,7 @@ const AddProductForm = () => {
         return null
   }
 
-  const [errors, setErrors] = useState({name: "d-none", category: "d-none", price: "d-none"})
-
+  // Manage error message while writing input
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
 
@@ -42,8 +43,7 @@ const AddProductForm = () => {
       console.log(errors)  
   }
 
-
-
+  // Submit if no errors
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if(errors.name === "d-none" && errors.category === "d-none" && errors.price === "d-none"){

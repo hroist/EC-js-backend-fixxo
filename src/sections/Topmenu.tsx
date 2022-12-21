@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import MenuLinkCircle from '../components/ui/MenuLinkCircle'
 import MenuCircleBtn from '../components/ui/MenuCircleBtn'
-import { NavLink, NavLinkProps } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import ShoppingCart from '../components/ShoppingCart'
 import { IShoppingCartContext, useShoppingCart } from '../contexts/ShoppingCartContext'
 import { IUserContext, UserContext } from '../contexts/UserContext'
@@ -9,7 +9,7 @@ import { IUserContext, UserContext } from '../contexts/UserContext'
 const Topmenu = () => {
 
     const {cartQuantity, cartOpen, toggleShoppingCart} = useShoppingCart() as IShoppingCartContext
-    const { thisUserId } = React.useContext(UserContext) as IUserContext
+    const { loggedIn } = React.useContext(UserContext) as IUserContext
 
     // change bg-color on scroll
     const [color, setColor] = useState(false)
@@ -45,7 +45,7 @@ const Topmenu = () => {
                 <NavLink className="nav-item" to="/products" >Products</NavLink>
                 <NavLink className="nav-item" to="/contacts" end>Contacts</NavLink>
                 { 
-                    thisUserId === '' ? 
+                    !loggedIn ? 
                     <NavLink className="nav-item" to="/login" end>Login</NavLink> 
                     :
                     <NavLink className="nav-item" to="/account" end>My account{}</NavLink>

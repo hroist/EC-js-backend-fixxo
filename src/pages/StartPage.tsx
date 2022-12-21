@@ -10,7 +10,6 @@ import Showcase from '../sections/Showcase'
 import ProductGrid from '../sections/ProductGrid'
 import { IProductContext, useProductContext } from '../contexts/ProductContext'
 import InfoIcons from '../sections/InfoIcons'
-import { IProduct } from '../models/ProductsModels'
 
 const StartPage = () => {
   document.title = 'Fixxo.'

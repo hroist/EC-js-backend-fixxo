@@ -28,7 +28,7 @@ const MyAccountPage = () => {
   useEffect(() => {
     checkLoggedIn()
     get(thisUserId)
-  }, [])
+  }, [thisUserId, loggedIn, modalIsOpen ])
 
   const userName = user.firstName
     
@@ -49,7 +49,8 @@ const customStyles = {
   
   return (
     <>
-        { loggedIn ? (
+        { (loggedIn && thisUserId !== '') ? 
+        (
           <>
             <Topmenu />
             <SiteTitle title={`My account ${loggedIn ? ` - Logged in as ${userName}` : ""} `} />
@@ -62,14 +63,17 @@ const customStyles = {
               <h1>All products</h1>
               <ProductsList />
             </div>
-          </>) 
+          </>
+        ) 
         : 
-        (<>
-        <div className="container-small c-content mt-3 mb-3">
-            <span> You have been logged out. &nbsp; </span> 
-            <NavLink to="/login"> Click here to log in again </NavLink>
-          </div>
-        </>)
+        (
+          <>
+            <div className="container-small c-content mt-3 mb-3">
+              <span> You have been logged out. &nbsp; </span> 
+              <NavLink to="/login"> Click here to log in again </NavLink>
+            </div>
+          </>
+        )
         }
 
     </>

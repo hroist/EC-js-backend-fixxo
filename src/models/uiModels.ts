@@ -3,8 +3,7 @@ import { To } from "react-router-dom"
 export interface IButton {
     buttontext: string
     onClick?: () => void
-
-  }
+}
 
 export interface ISizeButton {
     size: string | number

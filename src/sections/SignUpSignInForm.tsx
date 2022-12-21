@@ -6,10 +6,9 @@ import { IErrors, IForm } from '../models/SignUpSignInModels'
 const SignUpSignInForm = () => {
     
   const { userRequest, setUserRequest, createUser, userCreated, handleSignIn, userSignin, setUserSignin, failedAuth } = React.useContext(UserContext) as IUserContext
-
   const [errors, setErrors] = useState<IErrors>({} as IErrors)
 
-
+  // FORM VALIDATION
   const validate = (e: any, form?: IForm |null) => {
       if (e.type === 'submit') {
        const errors: IErrors = {} as IErrors
@@ -105,49 +104,49 @@ const SignUpSignInForm = () => {
             <form onSubmit={handleSignIn}>
                 <div className="signin-form-box">
                     <div>
-                        <input id="signin-email" value={userSignin.email} onChange={(e) => setUserSignin({...userSignin, email: e.target.value})} type="email" placeholder="Your email" />
+                        <input id="signin-email" value={userSignin.email} onChange={(e) => setUserSignin({...userSignin, email: e.target.value})} type="email" placeholder="Your email" required />
                         <div className={`invalid-feedback ${ failedAuth ? "" : "d-none" }`}>The email address or password is incorrect. </div>
                     </div>
                     <div>
-                        <input id="signin-password" value={userSignin.password} onChange={(e) => setUserSignin({...userSignin, password: e.target.value})} type="password" placeholder="Your password" />
+                        <input id="signin-password" value={userSignin.password} onChange={(e) => setUserSignin({...userSignin, password: e.target.value})} type="password" placeholder="Your password" required />
                     </div>
                 </div>             
                 <button type="submit" className="button-forms">LOG IN</button>
             </form>
 
-            {
-                userCreated ? (
+            {userCreated ? 
+                (
                     <div>Your account is created and you can now log in! </div> 
-                    ) 
-                    :
-                    (
+                ) 
+                :
+                (
                     <>
-                     <h1 className="form-title">. . . or sign up</h1>
-                     <form onSubmit={createUser}>
-                        <div className="signup-form-box">
-                            <div>
-                                <input id="firstName" value={userRequest.firstName} onChange={handleChange} type="text" className={`${ errors.firstName == null ? "" : "error" }`} placeholder='First name'></input>
-                                <div id="invalid-feedback-firstName" className={`invalid-feedback ${ errors.firstName == null ? "d-none" : "" }`}>{errors.firstName}</div>
-                            </div>
-                            <div>
-                                <input id="lastName" value={userRequest.lastName} onChange={handleChange} type="text" className={`${ errors.lastName == null ? "" : "error" }`} placeholder='Last name'></input>
-                                <div id="invalid-feedback-lastName" className={`invalid-feedback ${ errors.lastName == null ? "d-none" : "" }`}>{errors.lastName}</div>
-                            </div>
+                        <h1 className="form-title">. . . or sign up</h1>
+                        <form onSubmit={createUser}>
+                            <div className="signup-form-box">
+                                <div>
+                                    <input id="firstName" value={userRequest.firstName} onChange={handleChange} type="text" className={`${ errors.firstName == null ? "" : "error" }`} placeholder='First name'></input>
+                                    <div id="invalid-feedback-firstName" className={`invalid-feedback ${ errors.firstName == null ? "d-none" : "" }`}>{errors.firstName}</div>
+                                </div>
+                                <div>
+                                    <input id="lastName" value={userRequest.lastName} onChange={handleChange} type="text" className={`${ errors.lastName == null ? "" : "error" }`} placeholder='Last name'></input>
+                                    <div id="invalid-feedback-lastName" className={`invalid-feedback ${ errors.lastName == null ? "d-none" : "" }`}>{errors.lastName}</div>
+                                </div>
 
-                            <div>
-                                <input id="email" value={userRequest.email} onChange={handleChange} type="email" className={`${ errors.email == null ? "" : "error" }`} placeholder='Email'></input>
-                                <div id="invalid-feedback-email" className={`invalid-feedback ${ errors.email == null ? "d-none" : "" }`}>{errors.email}</div>
+                                <div>
+                                    <input id="email" value={userRequest.email} onChange={handleChange} type="email" className={`${ errors.email == null ? "" : "error" }`} placeholder='Email'></input>
+                                    <div id="invalid-feedback-email" className={`invalid-feedback ${ errors.email == null ? "d-none" : "" }`}>{errors.email}</div>
+                                </div>
+                                <div>
+                                    <input id="password" value={userRequest.password} onChange={handleChange} type="password" className={`${ errors.password == null ? "" : "error" }`} placeholder='Password'></input>
+                                    <div id="invalid-feedback-password" className={`invalid-feedback ${ errors.password == null ? "d-none" : "" }`}>{errors.password}</div>
+                                </div>
                             </div>
-                            <div>
-                                <input id="password" value={userRequest.password} onChange={handleChange} type="password" className={`${ errors.password == null ? "" : "error" }`} placeholder='Password'></input>
-                                <div id="invalid-feedback-password" className={`invalid-feedback ${ errors.password == null ? "d-none" : "" }`}>{errors.password}</div>
-                            </div>
-                        </div>
-                        <button type="submit" className="button-forms">SIGN UP</button>
-                     </form> 
-                    </>)                
+                            <button type="submit" className="button-forms">SIGN UP</button>
+                        </form> 
+                    </>
+                )                
             }
-
         </div>
     </section>
   )

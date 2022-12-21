@@ -1,9 +1,6 @@
 import ShoppingCart from "../components/ShoppingCart"
 import React, { useState, useContext } from "react";
 import { IShoppingCartItem } from "../models/ShoppingCartModels";
-import { IProduct } from "../models/ProductsModels";
-
-// cartOpen, toggleShoppingCart, cartItems, cartQuantity, getItemQuantity, incrementQuantity, decrementQuantity, addMultipleItems, removeItem
 
 export interface IShoppingCartContext {
     cartItems: IShoppingCartItem[]
@@ -21,8 +18,6 @@ interface IShoppingCartProviderProps {
     children: any
 }
 
-
-// const { createContext, useContext, useState } = require("react");
 const ShoppingCartContext  = React.createContext<IShoppingCartContext | null>(null)
 
 export const useShoppingCart = () => {

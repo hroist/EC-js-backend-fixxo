@@ -86,8 +86,7 @@ export const ProductProvider = ({ children }: IProductProviderProps ) => {
 
     // GET PRODUCTS
 
-    // with GraphQL (get all products)
-    
+    // with GraphQL (get all products) 
     const GET_PRODUCTS_QUERY = gql`{ products { _id, name, price, description, tag, category, price, rating, imageName }}`
     const getProductsQuery = useQuery(GET_PRODUCTS_QUERY, {pollInterval: 500})
   

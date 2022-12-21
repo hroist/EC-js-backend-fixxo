@@ -10,7 +10,7 @@ const ProductListItem = ({item}:IProductListItem) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { setSubmitted, remove } = useProductContext() as IProductContext
 
-
+  // MODAL 
   const setModalIsOpenToTrue =()=>{
     setSubmitted(false)
     setModalIsOpen(true)
@@ -21,6 +21,7 @@ const ProductListItem = ({item}:IProductListItem) => {
     setSubmitted(false)
   }
 
+  // MODAL STYLES
   const customStyles = {
     overlay: {
       zIndex : "99",

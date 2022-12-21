@@ -16,7 +16,6 @@ export interface IUserContext {
     checkLoggedIn: () => void 
     get: (id: string) => void
     getAll: () => void
-    remove: (id: string) => void
     userCreated: boolean
     thisUserId: string
     failedAuth: boolean
@@ -49,19 +48,19 @@ export const UserContext = createContext<IUserContext |null>(null)
 export const useUserContext = () => { return useContext(UserContext)}
 
 const UserProvider = ({children}:IUserProviderProps) => {
-  const apiUrl = 'http://localhost:5000/api/users'
-  const user_default: IUser = { _id: "", firstName: "", lastName: "", email: ""}
-  const userRequest_default: IUserRequest = { firstName: '', lastName: '', email: '', password: ''}
-  const navigate = useNavigate()
+    const apiUrl = 'http://localhost:5000/api/users'
+    const user_default: IUser = { _id: "", firstName: "", lastName: "", email: ""}
+    const userRequest_default: IUserRequest = { firstName: '', lastName: '', email: '', password: ''}
+    const navigate = useNavigate()
 
-  const [user, setUser] = useState<IUser>(user_default)
-  const [userRequest, setUserRequest] = useState<IUserRequest>(userRequest_default)
-  const [users, setUsers] = useState<IUser[]>([])
-  const [userSignin, setUserSignin] = useState<IUserSignin>( {email: "", password: ""})
-  const [userCreated, setUserCreated] = useState<boolean>(false)
-  const [loggedIn, setLoggedIn] = useState<boolean>(false)
-  const [thisUserId, setThisUserId] = useState<string>('')
-  const [failedAuth, setFailedAuth] = useState<boolean>(false)
+    const [user, setUser] = useState<IUser>(user_default)
+    const [userRequest, setUserRequest] = useState<IUserRequest>(userRequest_default)
+    const [users, setUsers] = useState<IUser[]>([])
+    const [userSignin, setUserSignin] = useState<IUserSignin>( {email: "", password: ""})
+    const [userCreated, setUserCreated] = useState<boolean>(false)
+    const [loggedIn, setLoggedIn] = useState<boolean>(false)
+    const [thisUserId, setThisUserId] = useState<string>('')
+    const [failedAuth, setFailedAuth] = useState<boolean>(false)
 
 
     // CREATE USER
@@ -99,10 +98,10 @@ const UserProvider = ({children}:IUserProviderProps) => {
         const data = await result.json()
 
         localStorage.setItem('accessToken', data.accessToken)
-        setLoggedIn(true)
+                    setFailedAuth(false)
 
         if (result.status === 200){
-
+            setLoggedIn(true)
             const parseJWT:any = (token:any) => {
                 if (!token) { return; }
                 const base64Url = token.split('.')[1];
@@ -111,16 +110,18 @@ const UserProvider = ({children}:IUserProviderProps) => {
             }
             setThisUserId(parseJWT(data.accessToken).id)
             setUserSignin({email: "", password: ""})
+            navigate('/account')
             setFailedAuth(false)
-            navigate('/account', {replace: true})
-        } else
+            console.log(failedAuth)
+        } else {
             console.log("error")
             setFailedAuth(true)
+        }
     }
 
     // CHECK IF USER IS LOGGED IN
     const checkLoggedIn = () => {
-        if (localStorage.getItem('accessToken')) {
+        if (localStorage.getItem('accessToken') && thisUserId !== '') {
             setLoggedIn(true)
         } else {
             setLoggedIn(false)
@@ -142,41 +143,28 @@ const UserProvider = ({children}:IUserProviderProps) => {
         if (result.status === 200)
             setUsers(await result.json())
     }
-    
-    // DELETE USER
-    const remove = async (id: string) => {
-        const result = await fetch(`${apiUrl}/${id}`, {
-            method: 'delete',
-        })
 
-        if (result.status === 204)
-            console.log("user deleted")
-            setUser(user_default)
-            console.log(`User with ID ${id} removed`)
-    }
-
-  return (
-    <UserContext.Provider value={{  user, 
-                                    setUser, 
-                                    userRequest, 
-                                    setUserRequest, 
-                                    users, 
-                                    createUser, 
-                                    userCreated, 
-                                    handleSignIn, 
-                                    userSignin, 
-                                    setUserSignin,
-                                    loggedIn,
-                                    setLoggedIn,
-                                    checkLoggedIn,
-                                    thisUserId,
-                                    get, 
-                                    getAll, 
-                                    remove,
-                                    failedAuth}}>
-        {children}
-    </UserContext.Provider>
-  )
+    return (
+        <UserContext.Provider value={{  user, 
+                                        setUser, 
+                                        userRequest, 
+                                        setUserRequest, 
+                                        users, 
+                                        createUser, 
+                                        userCreated, 
+                                        handleSignIn, 
+                                        userSignin, 
+                                        setUserSignin,
+                                        loggedIn,
+                                        setLoggedIn,
+                                        checkLoggedIn,
+                                        thisUserId,
+                                        get, 
+                                        getAll, 
+                                        failedAuth}}>
+            {children}
+        </UserContext.Provider>
+    )
 }
 
 export default UserProvider
